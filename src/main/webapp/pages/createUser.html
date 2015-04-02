@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>create User</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script type="text/javascript">
+
+        var user = new Object();
+        user.login = "Pierre";
+        user.password ="secure";
+        user.beginDate="01/04/2015";
+        user.endDate="05/04/2015";
+        user.lastName = "Wayne";
+        user.firstName = "Bruce";
+
+        $.ajax({
+            url : "/Jarvis/rest/users",
+            type: "POST",
+            data:JSON.stringify(user),
+            dataType   : "json",
+            success    : function(){
+                console.log("Pure jQuery Pure JS object");
+            }
+        });
+
+    </script>
+</head>
+<body>
+<p>
+    Example of submission JS Object by JSON Body Request<br/>
+    Its could submitted mass amount of data by Message body<br/>
+    It's secured and faster than any data submission .
+</p>
+</body>
+</html>
