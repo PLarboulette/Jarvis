@@ -14,7 +14,6 @@ function Connexion() {
 
             if (data != "" ) {
                 console.log("utilisateur détecté");
-                console.log(data);
 
                 /*Callback*/
 

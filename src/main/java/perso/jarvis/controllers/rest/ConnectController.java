@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import perso.jarvis.beans.User;
 import perso.jarvis.redis.Redis;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -52,14 +54,14 @@ public class ConnectController {
 
         try {
             if (userConnected != null) {
-            response.getWriter().write(userConnected.getId());
+            //response.getWriter().write(userConnected.getId());
+                response.sendRedirect("/Jarvis/pages/index.html");
+                System.out.println("OK redirection");
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
 
 
     }
