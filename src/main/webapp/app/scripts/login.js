@@ -2,33 +2,14 @@
  * Created by Pierre on 02/04/2015.
  */
 
-function Connexion() {
-    var login = $("#login").val();
-    var password = $("#password").val();
+var app = angular.module("jarvisApp",[]);
 
-    $.ajax({
-        url : "/Jarvis/rest/connect",
-        type: "GET",
-        data:"login="+login+"&password="+password,
-        success    : function(data){
+app.controller("test",function($scope) {
 
-            if (data != "" ) {
-                console.log("utilisateur détecté");
-
-                /*Callback*/
-
-
-            } else {
-                console.log("Pas d'utilisateur");
-            }
-        }
+        $scope.phones=[{"name":"test"},{"name":"Test23"}];
     });
 
 
-
-
-}
-
-function loadProjectsForUser(id) {
-
-}
+app.controller("show",function($scope) {
+    $scope.showContent = true;
+});

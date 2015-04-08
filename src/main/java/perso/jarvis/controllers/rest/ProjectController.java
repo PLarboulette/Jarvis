@@ -81,11 +81,18 @@ public class ProjectController {
      */
     @RequestMapping(value="/user/getProjects", method= RequestMethod.GET)
     public @ResponseBody
-    void getProjects (HttpServletRequest request, HttpServletResponse response) {
+    List<Project> getProjects (HttpServletRequest request, HttpServletResponse response) {
 
         logger.info("getProjects");
         String userId = request.getParameter("userId");
+        userId="Pierre";
+
         List<Project> result = projectService.getProjects(userId);
+        System.out.println(result.size());
+
+
+
+        return result;
     }
 
 

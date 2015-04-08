@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Jarvis</title>
+
+    <!--Libs-->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <!-- lib css -->
+    <link rel="stylesheet" type="text/css" href="lib/angular-material/angular-material.css">
+
+    <!--Hammer-->
+    <script src="lib/hammerjs/hammer.js"> </script>
+
+
+    <!--Project-->
+    <script src="app/app.js"></script>
+
+    <script src="app/signin/signin.controller.js"></script>
+    <script src="app/signin/signin.route.js"></script>
+    <script src="app/services/signin.service.js"></script>
+
+    <script src="app/projects/projects.controller.js"></script>
+    <script src="app/projects/projects.route.js"></script>
+    <script src="app/services/projects.service.js"></script>
+
+
+    <!--
+
+    <script src="app/controllers/cartController.js"></script>
+    <script src="app/routes/cartRoute.js"></script>
+
+    <script src="app/controllers/productController.js"></script>
+    <script src="app/routes/productRoute.js"></script>
+
+    <script src="app/services/connectService.js"></script>
+    <script src="app/services/productService.js"></script>
+    <script src="app/services/cartService.js"></script>-->
+
+
+
+
+</head>
+<body ng-app="JarvisApp">
+
+<md-content ng-view layout="column"></md-content>
+
+</body>
+</html>
