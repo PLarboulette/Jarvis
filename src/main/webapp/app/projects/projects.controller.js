@@ -42,12 +42,14 @@
         };
 
 
+        $scope.addProject = function() {
+            $location.path('addProject');
+        };
+
+    };
 
 
-    }
 
 })();
 
-/**
- * Created by Pierre on 08/04/2015.
- */
+

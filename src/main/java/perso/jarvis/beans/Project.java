@@ -11,9 +11,12 @@ public class Project {
 
     private String id;
     private String name;
+    private String description;
     private String beginDate;
     private String endDate;
     private ArrayList<Task> listTasks;
+    private boolean achieved;
+
 
 
     public String getName() {
@@ -25,7 +28,13 @@ public class Project {
     }
 
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getId() {
         return id;
@@ -57,5 +66,13 @@ public class Project {
 
     public void setListTasks(ArrayList<Task> listTasks) {
         this.listTasks = listTasks;
+    }
+
+    public boolean isAchieved() {
+        return achieved;
+    }
+
+    public void setAchieved(boolean achieved) {
+        this.achieved = achieved;
     }
 }

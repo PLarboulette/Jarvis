@@ -1,8 +1,19 @@
 <md-toolbar>
-    <div class="md-toolbar-tools" layout="row">
-        <div class="md-toolbar-tools" layout="row">
+    <div class="md-toolbar-tools">
+       <!-- <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>-->
+        <h2>
             <span>Projets</span>
-        </div>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="More" ng-click="addProject();">
+            <md-icon md-svg-icon="app/images/icons/plus.svg" style="color: red;" ></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+            <md-icon md-svg-icon="app/images/icons/minus.svg" style="color: red;" ></md-icon>
+        </md-button>
+
     </div>
 </md-toolbar>
 
