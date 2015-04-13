@@ -14,9 +14,24 @@
 
     function addProjectController($scope, $location, $log) {
 
+    $scope.project = {
+        projectName : "",
+        projectDescription : "",
+        projectBeginDate : "",
+        projectEndDate : ""
+    }
+
+    $scope.createProject = function() {
+        console.log("OK");
+        var projectToCreate = {};
+        projectToCreate.projectName = $scope.project.projectName;
+        projectToCreate.projectDescription = $scope.project.projectDescription;
+        projectToCreate.projectBeginDate = $scope.project.projectBeginDate;
+        projectToCreate.projectEndDate = $scope.project.projectEndDate;
 
 
 
+    }
 
     };
 

@@ -6,14 +6,15 @@
 (function () {
     angular
         .module('JarvisApp')
-        .factory('jarvisAppConnexion', jarvisAppConnexion);
+        .factory('Projects', projects);
 
-    function jarvisAppConnexion($http) {
-        return {
-            connection: function () {
-                return $http.get('rest/user/getProjects');
-            }
-        };
+
+    projects.$inject = ['$resource'];
+
+    function projects($resource) {
+        return $resource('rest/user/userID/project', {userID:'@id'});
     }
 })();
+
+
 

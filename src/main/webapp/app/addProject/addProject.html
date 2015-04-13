@@ -1,21 +1,32 @@
 <div layout="column" layout-align="start center">
-    <form name="projectForm">
+    <form name="addProjectForm">
         <div layout="column">
+
             <md-input-container layout="column">
-                <label>Identifiant</label>
-                <input type="text" ng-model="user.login">
+                <label>Nom du projet</label>
+                <input type="text" ng-model="project.projectName">
             </md-input-container>
 
             <md-input-container layout="column">
-                <label>Mot de passe</label>
-                <input type="password" ng-model="user.password">
+                <label>Description du projet</label>
+                <input type="text" ng-model="project.projectDescription">
             </md-input-container>
 
-            <md-button class="md-raised md-primary" ng-click="submit()">Connection</md-button>
+            <md-input-container layout="column">
+                <label>Date de début</label>
+                <input type="text" ng-model="project.projectBeginDate">
+            </md-input-container>
+
+            <md-input-container layout="column">
+                <label>Date de fin</label>
+                <input type="text" ng-model="project.projectEndDate">
+            </md-input-container>
+
+            <md-button class="md-raised md-primary" ng-click="createProject()">Créer le projet</md-button>
 
             <md-input-container layout="column">
                 <div ng-messages="errors" layout-align="center center">
-                    <div ng-message="unauthorized">Login et/ou mot de passe inconu(s)</div>
+                    <div ng-message="unauthorized">Erreur(s) lors de l'insertion</div>
                 </div>
             </md-input-container>
 

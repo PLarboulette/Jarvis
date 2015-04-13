@@ -28,65 +28,34 @@ public class ProjectController {
     ProjectService projectService;
 
     /**
-     *
+     * Create a project for an user
+     * @param idUser
+     * @param project
      * @param request
      * @param httpServletResponse
      */
-    @RequestMapping(value="/projects", method= RequestMethod.POST)
-    public void createProject (HttpServletRequest request, HttpServletResponse httpServletResponse) {
+    @RequestMapping(value="user/{userID}/project", method= RequestMethod.POST)
+    public void createProject (@PathVariable("userID") String idUser, @RequestBody Project project, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createProject");
 
-        BufferedReader br = null;
-        String json = "";
+        projectService.createProject(project);
 
-        try {
-            br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            if(br != null){
-                json = br.readLine();
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            Project project = mapper.readValue(json, Project.class);
-            projectService.createProject(project);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
-
-    /**
-     *
-     * @param id user's id
-     * @param project the project to add
-     * @param request
-     * @param httpServletResponse
-     */
-    @RequestMapping(value="/user/addProjectForUser", method= RequestMethod.POST)
-    public @ResponseBody void addProjectForUser (HttpServletRequest request, HttpServletResponse httpServletResponse) {
-        logger.info("createUser");
-        String userId = request.getParameter("userId");
-        String projectId = request.getParameter("projectId");
-
-        projectService.addProjectForUser(projectId, userId);
     }
 
 
     /**
      *
-     * @param id user's id
+     * @param userId
      * @param request
      * @param response
+     * @return
      */
-    @RequestMapping(value="/user/getProjects", method= RequestMethod.GET)
+    @RequestMapping(value="/user/{userID}/project", method= RequestMethod.GET)
     public @ResponseBody
-    List<Project> getProjects (HttpServletRequest request, HttpServletResponse response) {
+    List<Project> getProjects (@PathVariable("userID") String userId, HttpServletRequest request, HttpServletResponse response) {
 
         logger.info("getProjects");
-        String userId = request.getParameter("userId");
         userId="Pierre";
-
         List<Project> result = projectService.getProjects(userId);
         System.out.println(result.size());
 
@@ -99,5 +68,20 @@ public class ProjectController {
 
 
 
+   /* *//**
+     *
+     * @param id user's id
+     * @param project the project to add
+     * @param request
+     * @param httpServletResponse
+     *//*
+    @RequestMapping(value="/user/addProjectForUser", method= RequestMethod.POST)
+    public @ResponseBody void addProjectForUser (HttpServletRequest request, HttpServletResponse httpServletResponse) {
+        logger.info("createUser");
+        String userId = request.getParameter("userId");
+        String projectId = request.getParameter("projectId");
+
+        projectService.addProjectForUser(projectId, userId);
+    }*/
 
 }
