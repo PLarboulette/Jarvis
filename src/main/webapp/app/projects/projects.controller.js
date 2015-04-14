@@ -12,13 +12,11 @@
         .module('JarvisApp')
         .controller('ProjectsController', projectsController);
 
-    projectsController.$inject = ['$scope', '$location','$log','Projects','$http'];
+    projectsController.$inject = ['$scope', '$location','$log','Projects','$http','$mdSidenav'];
 
-    function projectsController($scope, $location, $log, Projects, $http) {
+    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav) {
 
-
-
-
+        loadProjects();
 
         $scope.addTab = function (title, view) {
             view = view || title + " Content View";
@@ -33,18 +31,49 @@
         $scope.addProject = function() {
             $location.path('addProject');
 
-            $http.get("http://www.w3schools.com/angular/customers.php").
+        }
+
+        function loadProjects () {
+            $http.get("rest/user/userID/project").
                 success(function(data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
-                    console.log(data);
+                    var tabs = [];
+
+                    for (var i = 0 ; i < data.length; i++) {
+                        tabs.push( {title: data[i]['name'], content: data[i]['description']} );
+                    }
+                    $scope.tabs = tabs,selected = null,
+                        previous = null;
+
+
                 }).
                 error(function(data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
-
         };
+
+
+        $scope.close = function() {
+            $mdSidenav('left').close()
+                .then(function(){
+                    $log.debug("close LEFT is done");
+                });
+        };
+
+        $scope.toggleLeft = function() {
+            $mdSidenav('left').toggle()
+                .then(function(){
+                    $log.debug("toggle left is done");
+                });
+        };
+
+
+
+
+
+
 
     };
 

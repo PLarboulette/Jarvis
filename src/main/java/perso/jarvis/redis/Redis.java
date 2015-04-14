@@ -128,11 +128,14 @@ public class Redis implements ServletContextListener {
      */
     public static Project getProjectFromID (String id) {
         Project project = new Project();
-        Map<String,String> projectProperties = jedis.hgetAll(id);
+        Map<String,String> projectProperties = jedis.hgetAll("Project : "+id);
         for (String key : projectProperties.keySet()) {
             switch(key) {
                 case "projectId" :
                     project.setId(projectProperties.get(key));
+                    break;
+                case "projectDescription" :
+                    project.setDescription(projectProperties.get(key));
                     break;
                 case "projectName" :
                     project.setName(projectProperties.get(key));

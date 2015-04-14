@@ -12,7 +12,7 @@ public interface ProjectService {
 
 
     // State OK (01/04/2015)
-    void createProject(Project project);
+    void createProject(Project project, String idUser);
 
     void addProjectForUser (String projectId, String userId);
 

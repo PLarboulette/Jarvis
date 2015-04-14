@@ -38,8 +38,8 @@ public class ProjectController {
     public void createProject (@PathVariable("userID") String idUser, @RequestBody Project project, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createProject");
 
-        projectService.createProject(project);
-
+        System.out.println(project);
+        projectService.createProject(project,"Login");
     }
 
 
@@ -55,7 +55,7 @@ public class ProjectController {
     List<Project> getProjects (@PathVariable("userID") String userId, HttpServletRequest request, HttpServletResponse response) {
 
         logger.info("getProjects");
-        userId="Pierre";
+        userId="Login";
         List<Project> result = projectService.getProjects(userId);
         System.out.println(result.size());
 
@@ -81,7 +81,7 @@ public class ProjectController {
         String userId = request.getParameter("userId");
         String projectId = request.getParameter("projectId");
 
-        projectService.addProjectForUser(projectId, userId);
+       projectService.ad dProjectForUser(projectId, userId);
     }*/
 
 }

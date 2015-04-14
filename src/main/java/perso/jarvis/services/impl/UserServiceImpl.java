@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
         userProperties.put("userPassword", user.getPassword());
         userProperties.put("userLastName", user.getLastName());
         userProperties.put("userFirstName", user.getFirstName());
-        userProperties.put("userProjects", "Projects : "+String.valueOf(user.hashCode()));
+        userProperties.put("userProjects", "Projects : "+user.getLogin());
         Redis.insertHash("User",user.getLogin(),userProperties);
     }
 
