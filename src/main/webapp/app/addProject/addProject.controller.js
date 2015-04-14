@@ -10,9 +10,9 @@
         .module('JarvisApp')
         .controller('addProjectController', addProjectController);
 
-    addProjectController.$inject = ['$scope', '$location','$log'];
+    addProjectController.$inject = ['$scope', '$location','$log','Projects'];
 
-    function addProjectController($scope, $location, $log) {
+    function addProjectController($scope, $location, $log, Projects) {
 
     $scope.project = {
         projectName : "",
@@ -30,6 +30,7 @@
         projectToCreate.projectEndDate = $scope.project.projectEndDate;
 
 
+        Projects.$save({userId:"Pierre"},project);
 
     }
 

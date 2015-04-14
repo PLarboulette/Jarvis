@@ -14,15 +14,17 @@
             'ngMessages',
             'ngResource'
         ])
-        .config(routeConfig)
+        .config(config)
 
-    routeConfig.$inject = ['$routeProvider'];
+    config.$inject = ['$routeProvider'];
 
-    function routeConfig($routeProvider) {
+    function config($routeProvider) {
         $routeProvider.
             otherwise({
                 redirectTo: '/connection'
             });
+
+
     }
 
 })();
