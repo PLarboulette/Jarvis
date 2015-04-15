@@ -16,8 +16,12 @@ public interface ProjectService {
 
     void addProjectForUser (String projectId, String userId);
 
-    // State OK (01/04/2015)
     List<Project> getProjects(String id);
+
+    Project getProject(String idProject);
+
+    void updateProject(Project project, String idUser);
+
 
 
 }

@@ -15,7 +15,9 @@ public class Project {
     private String beginDate;
     private String endDate;
     private ArrayList<Task> listTasks;
-    private boolean achieved;
+    private String achieved;
+    private ArrayList<String> technologies;
+
 
 
 
@@ -68,11 +70,19 @@ public class Project {
         this.listTasks = listTasks;
     }
 
-    public boolean isAchieved() {
+    public String getAchieved() {
         return achieved;
     }
 
-    public void setAchieved(boolean achieved) {
+    public void setAchieved(String achieved) {
         this.achieved = achieved;
+    }
+
+    public ArrayList<String> getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(ArrayList<String> technologies) {
+        this.technologies = technologies;
     }
 }

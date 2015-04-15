@@ -18,7 +18,8 @@
         projectName : "",
         projectDescription : "",
         projectBeginDate : "",
-        projectEndDate : ""
+        projectEndDate :"",
+        projectTechnologies : ""
     }
 
     $scope.createProject = function() {
@@ -28,23 +29,14 @@
         projectToCreate.description = $scope.project.projectDescription;
         projectToCreate.beginDate = $scope.project.projectBeginDate;
         projectToCreate.endDate = $scope.project.projectEndDate;
+        projectToCreate.technologies =  ["Java"];
+
 
 
         $http.post('rest/user/userID/project', projectToCreate).
             success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-                console.log(data);
-                console.log("ok pour l'insertion");
-
                 $route.reload();
                 $location.path('projects');
-
-
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
             });
 
     }

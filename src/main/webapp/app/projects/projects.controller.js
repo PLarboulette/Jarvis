@@ -12,9 +12,17 @@
         .module('JarvisApp')
         .controller('ProjectsController', projectsController);
 
-    projectsController.$inject = ['$scope', '$location','$log','Projects','$http','$mdSidenav'];
+    projectsController.$inject = ['$scope', '$location','$log','Projects','$http','$mdSidenav', '$route'];
 
-    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav) {
+    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav, $route) {
+
+        $scope.project = {
+            projectNameSettings : "",
+            projectDescriptionSettings : "",
+            projectBeginDateSettings : "",
+            projectEndDateSettings : "",
+            projectTechnologiesSettings : ""
+        }
 
         loadProjects();
 
@@ -71,8 +79,16 @@
             $mdSidenav('projectSettings').toggle()
                 .then(function(){
                     $log.debug("toggle RIGHT is done");
-                    $http.get("rest/user/userID/project").
+                    var idProject  = $scope.idProject;
+
+                    $http.get("rest/user/userID/project/idProject",{params : {"projectID" : idProject}} ).
                         success(function(data, status, headers, config) {
+                            console.log(data);
+                            $scope.project.projectNameSettings = data['name'];
+                            $scope.project.projectDescriptionSettings  = data['description'];
+                            $scope.project.projectBeginDateSettings = data['beginDate'];
+                            $scope.project.projectEndDateSettings = data['endDate'];
+                           // $scope.project.projectTechnologiesSettings =
 
                         }).
                         error(function(data, status, headers, config) {
@@ -85,7 +101,24 @@
         };
 
         $scope.saveProjectSettings = function () {
-            console.log("[SAUVEGARDE PARAMETRES PROJET");
+            var projectToCreate = {};
+            projectToCreate.name = $scope.project.projectNameSettings;
+            projectToCreate.description = $scope.project.projectDescriptionSettings;
+            projectToCreate.beginDate = $scope.project.projectBeginDateSettings;
+            projectToCreate.endDate = $scope.project.projectEndDateSettings;
+            projectToCreate.id = $scope.idProject;
+
+            // Faire un tableau pour les technologies
+            projectToCreate.technologies = ["java","CSharp"];
+
+                // $scope.project.projectTechnologiesSettings;
+
+            $http.put('rest/user/userID/project', projectToCreate).
+                success(function(data, status, headers, config) {
+                    $route.reload();
+                    $location.path('projects');
+                });
+
         }
 
 

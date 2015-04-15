@@ -146,6 +146,17 @@ public class Redis implements ServletContextListener {
                 case "projectBeginDate" :
                     project.setBeginDate(projectProperties.get(key));
                     break;
+                case "projectTechnologies" :
+                    String[] technologiesFromDB = projectProperties.get(key).split(";");
+                    ArrayList<String> technologies = new ArrayList<>();
+                    for (int i = 0 ; i< technologiesFromDB.length ; i++) {
+                        technologies.add(technologiesFromDB[i]);
+                    }
+                    project.setTechnologies(technologies);
+                    break;
+                case "projectAchieved" :
+                    project.setAchieved(projectProperties.get(key));
+                    break;
                 case "projectTasks" :
                     List<String> listIDTasks = Redis.getList(projectProperties.get(key));
                     ArrayList<Task> listTasksForProject = new ArrayList<Task>();
@@ -192,5 +203,7 @@ public class Redis implements ServletContextListener {
         }
         return task;
     }
+
+
 
 }

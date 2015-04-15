@@ -27,29 +27,29 @@
             <md-toolbar class="md-theme-light">
                 <h1 class="md-toolbar-tools">Informations projet</h1>
             </md-toolbar>
-            <md-content ng-controller="ProjectsController" layout-padding>
+            <md-content  layout-padding>
                 <form>
                     <md-input-container>
                         <label for="projectName">Nom</label>
-                        <input type="text" id="projectName"
+                        <input type="text" id="projectName" ng-model="project.projectNameSettings"
                                md-sidenav-focus>
                     </md-input-container>
 
                     <md-input-container>
                         <label for="projectDescription">Description</label>
-                        <input type="text" id="projectDescription"
+                        <input type="text" id="projectDescription" ng-model="project.projectDescriptionSettings"
                                md-sidenav-focus>
                     </md-input-container>
 
                     <md-input-container>
                         <label for="projectBeginDate">Date de début</label>
-                        <input type="text" id="projectBeginDate"
+                        <input type="text" id="projectBeginDate" ng-model="project.projectBeginDateSettings"
                                md-sidenav-focus>
                     </md-input-container>
 
                     <md-input-container>
                         <label for="projectEndDate">Date de fin</label>
-                        <input type="text" id="projectEndDate"
+                        <input type="text" id="projectEndDate" ng-model="project.projectEndDateSettings"
                                md-sidenav-focus>
                     </md-input-container>
 
