@@ -56,10 +56,6 @@ public class ProjectController {
         logger.info("getProjects");
         userId="Login";
         List<Project> result = projectService.getProjects(userId);
-        System.out.println(result.size());
-
-
-
         return result;
     }
 

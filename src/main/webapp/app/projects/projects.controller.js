@@ -31,10 +31,11 @@
 
 
         $scope.addProject = function() {
-            console.log(tab);
-            // $location.path('addProject');
+            $location.path('addProject');
 
         }
+
+        $scope.idProject = 0;
 
         function loadProjects () {
             $http.get("rest/user/userID/project").
@@ -42,7 +43,6 @@
                     // this callback will be called asynchronously
                     // when the response is available
                     var tabs = [],selected = null, previous = null;
-
                     for (var i = 0 ; i < data.length; i++) {
                         tabs.push( {title: data[i]['name'],
                             content: data[i]['description'],
@@ -50,21 +50,12 @@
                         } );
                     }
                     $scope.tabs = tabs;
-
                     $scope.selectedIndex =  1 ;
                     $scope.$watch('selectedIndex', function(current, old){
                         previous = selected;
                         selected = tabs[current];
-                        if ( old && (old != current)) $log.debug('Goodbye ' + previous.title + '!');
-                        if ( current )                $log.debug('Hello ' + selected.title + '!');
-                        console.log($scope.selectedIndex);
+                        $scope.idProject = tabs[current]['id'];
                     });
-
-
-                }).
-                error(function(data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
                 });
         };
 
@@ -80,6 +71,16 @@
             $mdSidenav('projectSettings').toggle()
                 .then(function(){
                     $log.debug("toggle RIGHT is done");
+                    $http.get("rest/user/userID/project").
+                        success(function(data, status, headers, config) {
+
+                        }).
+                        error(function(data, status, headers, config) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                        });
+
+                    // Charger infos projet
                 });
         };
 
@@ -105,7 +106,7 @@
  method: "GET",
  url: 'rest/user/Pierre/project'
  }).done(function (data) {
- console.log("[SUCCESS] Récupération des projets.");
+ console.log("[SUCCESS] Rï¿½cupï¿½ration des projets.");
  }),selected = null,
  previous = null;
 
