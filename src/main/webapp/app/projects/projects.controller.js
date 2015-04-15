@@ -55,19 +55,23 @@
         };
 
 
-        $scope.close = function() {
-            $mdSidenav('left').close()
+        $scope.closeProjectSettings = function() {
+            $mdSidenav('projectSettings').close()
                 .then(function(){
-                    $log.debug("close LEFT is done");
+                    $log.debug("close RIGHT is done");
                 });
         };
 
-        $scope.toggleLeft = function() {
-            $mdSidenav('left').toggle()
+        $scope.toggleProjectSettings = function() {
+            $mdSidenav('projectSettings').toggle()
                 .then(function(){
-                    $log.debug("toggle left is done");
+                    $log.debug("toggle RIGHT is done");
                 });
         };
+
+        $scope.saveProjectSettings = function () {
+            console.log("[SAUVEGARDE PARAMETRES PROJET");
+        }
 
 
 

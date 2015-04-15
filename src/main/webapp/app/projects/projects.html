@@ -1,46 +1,84 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <!-- <md-button class="md-icon-button" aria-label="Settings">
-             <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-         </md-button>-->
+
         <h2>
             <span>Projets</span>
         </h2>
+
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More" ng-click="addProject();">
-            <md-icon md-svg-icon="app/images/icons/plus.svg" style="color: red;" ></md-icon>
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleProjectSettings()">
+            <md-icon md-svg-icon="app/images/icons/settings.svg"></md-icon>
         </md-button>
-        <md-button class="md-icon-button" aria-label="More">
-            <md-icon md-svg-icon="app/images/icons/minus.svg" style="color: red;" ></md-icon>
+        <md-button class="md-icon-button" aria-label="More" ng-click="addProject();">
+            <md-icon md-svg-icon="app/images/icons/plus.svg"  ></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Less">
+            <md-icon md-svg-icon="app/images/icons/minus.svg"  ></md-icon>
         </md-button>
 
     </div>
 </md-toolbar>
 
 
-<div ng-controller="ProjectsController" layout="column" style="height:500px;">
+<div  layout="column" style="height:500px;">
     <section layout="row" flex>
 
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="projectSettings">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Informations projet</h1>
             </md-toolbar>
-            <md-content layout-padding ng-controller="ProjectsController">
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
+            <md-content ng-controller="ProjectsController" layout-padding>
+                <form>
+                    <md-input-container>
+                        <label for="projectName">Nom</label>
+                        <input type="text" id="projectName"
+                               md-sidenav-focus>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label for="projectDescription">Description</label>
+                        <input type="text" id="projectDescription"
+                               md-sidenav-focus>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label for="projectBeginDate">Date de début</label>
+                        <input type="text" id="projectBeginDate"
+                               md-sidenav-focus>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label for="projectEndDate">Date de fin</label>
+                        <input type="text" id="projectEndDate"
+                               md-sidenav-focus>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label for="projectTechnologies">Technologies</label>
+                        <input type="text" id="projectTechnologies"
+                               md-sidenav-focus>
+                    </md-input-container>
+
+                </form>
+                <md-button ng-click="saveProjectSettings()" class="md-primary">
+                    Enregistrer modifications
                 </md-button>
-                <p hide-md show-gt-md>
-                    This sidenav is locked open on your device. To go back to the default behavior,
-                    narrow your display.
-                </p>
+                <span flex></span>
+                <md-button ng-click="closeProjectSettings()" class="md-primary">
+                    Fermer
+                </md-button>
             </md-content>
         </md-sidenav>
+
+
 
         <md-content flex layout-padding>
             <div layout="column" layout-fill layout-align="top center">
 
             </div>
             <div flex></div>
+
+
 
             <md-tabs md-selected="selectedIndex" md-border-bottom>
                 <md-tab ng-repeat="tab in tabs"
@@ -53,6 +91,8 @@
                     </div>
                 </md-tab>
             </md-tabs>
+
+
 
 
         </md-content>
