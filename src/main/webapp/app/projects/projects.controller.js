@@ -28,8 +28,11 @@
         };
 
 
+
+
         $scope.addProject = function() {
-            $location.path('addProject');
+            console.log(tab);
+            // $location.path('addProject');
 
         }
 
@@ -38,13 +41,24 @@
                 success(function(data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
-                    var tabs = [];
+                    var tabs = [],selected = null, previous = null;
 
                     for (var i = 0 ; i < data.length; i++) {
-                        tabs.push( {title: data[i]['name'], content: data[i]['description']} );
+                        tabs.push( {title: data[i]['name'],
+                            content: data[i]['description'],
+                            id : data[i]['id']
+                        } );
                     }
-                    $scope.tabs = tabs,selected = null,
-                        previous = null;
+                    $scope.tabs = tabs;
+
+                    $scope.selectedIndex =  1 ;
+                    $scope.$watch('selectedIndex', function(current, old){
+                        previous = selected;
+                        selected = tabs[current];
+                        if ( old && (old != current)) $log.debug('Goodbye ' + previous.title + '!');
+                        if ( current )                $log.debug('Hello ' + selected.title + '!');
+                        console.log($scope.selectedIndex);
+                    });
 
 
                 }).

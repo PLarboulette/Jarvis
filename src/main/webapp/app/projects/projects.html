@@ -6,7 +6,7 @@
         </h2>
 
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleProjectSettings()">
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleProjectSettings('{{selectedIndex}}')">
             <md-icon md-svg-icon="app/images/icons/settings.svg"></md-icon>
         </md-button>
         <md-button class="md-icon-button" aria-label="More" ng-click="addProject();">
@@ -84,8 +84,10 @@
                 <md-tab ng-repeat="tab in tabs"
                         ng-disabled="tab.disabled"
                         label="{{tab.title}}">
+
                     <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
                         <div ng-bind="tab.content"></div>
+                        <div ng-bind="tab.id"></div>
                         <br/>
                         <!--<md-button class="md-primary md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button>-->
                     </div>
