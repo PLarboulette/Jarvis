@@ -19,14 +19,16 @@ public class UserServiceImpl implements UserService{
      */
     public void createUser(User user) {
 
+        System.out.println(user.getLogin());
+
         Map<String,String> userProperties = new HashMap<String,String>();
         userProperties.put("userId", String.valueOf(user.hashCode()));
         userProperties.put("userLogin", user.getLogin());
-        userProperties.put("userPassword", user.getPassword());
-        userProperties.put("userLastName", user.getLastName());
+        userProperties.put("userPassword", user.getLogin());
+       userProperties.put("userLastName", user.getLastName());
         userProperties.put("userFirstName", user.getFirstName());
-        userProperties.put("userProjects", "Projects : "+user.getLogin());
-        Redis.insertHash("User",user.getLogin(),userProperties);
+        userProperties.put("userProjects", "Projects : " + user.getLogin());
+       Redis.insertHash("User", user.getLogin(), userProperties);
     }
 
     /**

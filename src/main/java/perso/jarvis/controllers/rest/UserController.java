@@ -38,24 +38,12 @@ public class UserController {
      * @param response
      */
     @RequestMapping(value="/users", method= RequestMethod.POST)
-    public void createUser (HttpServletRequest request, HttpServletResponse response) {
+    public void createUser (@RequestBody User user,HttpServletRequest request, HttpServletResponse response) {
         logger.info("createUser");
 
-        BufferedReader br = null;
-        String json = "";
+        userService.createUser(user);
 
-        try {
-            br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            if(br != null){
-                json = br.readLine();
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            User user = mapper.readValue(json, User.class);
-            userService.createUser(user);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 

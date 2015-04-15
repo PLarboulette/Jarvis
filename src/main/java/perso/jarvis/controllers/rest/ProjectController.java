@@ -38,7 +38,6 @@ public class ProjectController {
     public void createProject (@PathVariable("userID") String idUser, @RequestBody Project project, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createProject");
 
-        System.out.println(project);
         projectService.createProject(project,"Login");
     }
 

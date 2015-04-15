@@ -1,6 +1,4 @@
-/**
- * Created by Pierre on 09/04/2015.
- */
+
 
 
 (function () {
@@ -12,11 +10,11 @@
 
     function config($routeProvider) {
         $routeProvider.
-            when('/addProject', {
-                templateUrl: 'app/addProject/addProject.html',
-                controller: 'AddProjectController'
+            when('/addUser', {
+                templateUrl: 'app/addUser/addUser.html',
+                controller: 'AddUserController'
             });
     }
-})();
-
-
+})();/**
+ * Created by plarboul on 15/04/2015.
+ */

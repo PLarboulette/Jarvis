@@ -8,7 +8,7 @@
 
     angular
         .module('JarvisApp')
-        .controller('addProjectController', addProjectController);
+        .controller('AddProjectController', addProjectController);
 
     addProjectController.$inject = ['$scope', '$location','$log','Projects','$http','$route'];
 

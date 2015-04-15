@@ -1,6 +1,5 @@
 package perso.jarvis.beans;
 
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
@@ -18,8 +17,11 @@ public class User {
     private String beginDate;
     private String endDate;
     private ArrayList<Project> listProjects;
+    private String accessToScrumboard;
 
+public User() {
 
+}
     public String getId() {
         return id;
     }
@@ -82,6 +84,15 @@ public class User {
 
     public void setListProjects(ArrayList<Project> listProjects) {
         this.listProjects = listProjects;
+    }
+
+
+    public String getAccessToScrumboard() {
+        return accessToScrumboard;
+    }
+
+    public void setAccessToScrumboard(String accessToScrumboard) {
+        this.accessToScrumboard = accessToScrumboard;
     }
 }
 

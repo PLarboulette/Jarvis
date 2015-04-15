@@ -1,0 +1,32 @@
+<div layout="column" layout-align="start center">
+
+
+<form name="addUserForm">
+    <div layout="column">
+
+
+        <md-input-container layout="column">
+            <label>Login</label>
+            <input type="text" ng-model="user.login">
+        </md-input-container>
+
+
+        <md-input-container layout="column">
+            <label>Nom</label>
+            <input type="text" ng-model="user.lastName">
+        </md-input-container>
+
+        <md-input-container layout="column">
+            <label>Prénom</label>
+            <input type="text" ng-model="user.firstName">
+        </md-input-container>
+
+        <md-button class="md-raised md-primary" ng-click="submit()">S'enregistrer</md-button>
+
+
+
+
+    </div>
+</form>
+
+ </div>

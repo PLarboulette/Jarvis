@@ -36,6 +36,10 @@
                     $scope.errors.unauthorized = true;
                 });
         }
+
+        $scope.newUser = function () {
+            $location.path('addUser');
+        }
     }
 
 })();
