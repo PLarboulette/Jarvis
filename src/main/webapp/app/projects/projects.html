@@ -20,87 +20,79 @@
 </md-toolbar>
 
 
-<div  layout="column" style="height:500px;">
-    <section layout="row" flex>
-
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="projectSettings">
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Informations projet</h1>
-            </md-toolbar>
-            <md-content  layout-padding>
-                <form>
-                    <md-input-container>
-                        <label for="projectName">Nom</label>
-                        <input type="text" id="projectName" ng-model="project.projectNameSettings"
-                               md-sidenav-focus>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <label for="projectDescription">Description</label>
-                        <input type="text" id="projectDescription" ng-model="project.projectDescriptionSettings"
-                               md-sidenav-focus>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <label for="projectBeginDate">Date de début</label>
-                        <input type="text" id="projectBeginDate" ng-model="project.projectBeginDateSettings"
-                               md-sidenav-focus>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <label for="projectEndDate">Date de fin</label>
-                        <input type="text" id="projectEndDate" ng-model="project.projectEndDateSettings"
-                               md-sidenav-focus>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <label for="projectTechnologies">Technologies</label>
-                        <input type="text" id="projectTechnologies"
-                               md-sidenav-focus>
-                    </md-input-container>
-
-                </form>
-                <md-button ng-click="saveProjectSettings()" class="md-primary">
-                    Enregistrer modifications
-                </md-button>
-                <span flex></span>
-                <md-button ng-click="closeProjectSettings()" class="md-primary">
-                    Fermer
-                </md-button>
-            </md-content>
-        </md-sidenav>
 
 
+<md-content flex layout-padding>
 
-        <md-content flex layout-padding>
-            <div layout="column" layout-fill layout-align="top center">
+    <md-tabs md-selected="selectedIndex" md-border-bottom>
+        <md-tab ng-repeat="tab in tabs"
+                ng-disabled="tab.disabled"
+                label="{{tab.title}}">
 
+            <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
+                <div ng-bind="tab.content"></div>
+                <div ng-bind="tab.id"></div>
+                <br/>
+                <!--<md-button class="md-primary md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button>-->
             </div>
-            <div flex></div>
+        </md-tab>
+    </md-tabs>
 
 
+    <div  layout="column" style="height:500px;">
+        <section layout="row" flex>
+            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="projectSettings">
+                <md-toolbar class="md-theme-light">
+                    <h1 class="md-toolbar-tools">Informations projet</h1>
+                </md-toolbar>
+                <md-content  layout-padding>
+                    <form>
+                        <md-input-container>
+                            <label for="projectName">Nom</label>
+                            <input type="text" id="projectName" ng-model="project.projectNameSettings"
+                                   md-sidenav-focus>
+                        </md-input-container>
 
-            <md-tabs md-selected="selectedIndex" md-border-bottom>
-                <md-tab ng-repeat="tab in tabs"
-                        ng-disabled="tab.disabled"
-                        label="{{tab.title}}">
+                        <md-input-container>
+                            <label for="projectDescription">Description</label>
+                            <input type="text" id="projectDescription" ng-model="project.projectDescriptionSettings"
+                                   md-sidenav-focus>
+                        </md-input-container>
 
-                    <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
-                        <div ng-bind="tab.content"></div>
-                        <div ng-bind="tab.id"></div>
-                        <br/>
-                        <!--<md-button class="md-primary md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button>-->
-                    </div>
-                </md-tab>
-            </md-tabs>
+                        <md-input-container>
+                            <label for="projectBeginDate">Date de début</label>
+                            <input type="text" id="projectBeginDate" ng-model="project.projectBeginDateSettings"
+                                   md-sidenav-focus>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label for="projectEndDate">Date de fin</label>
+                            <input type="text" id="projectEndDate" ng-model="project.projectEndDateSettings"
+                                   md-sidenav-focus>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label for="projectTechnologies">Technologies</label>
+                            <input type="text" id="projectTechnologies" ng-model="project.projectTechnologiesSettings"
+                                   md-sidenav-focus>
+                        </md-input-container>
+
+                        <div>
+                            <md-checkbox ng-model="project.projectAchievedSettings">
+                                Projet achevé
+                            </md-checkbox>
+                        </div>
+                    </form>
+                    <md-button ng-click="saveProjectSettings()" class="md-primary"> Enregistrer modifications </md-button>
+                    <span flex></span>
+                    <md-button ng-click="closeProjectSettings()" class="md-primary"> Fermer </md-button>
+                </md-content>
+            </md-sidenav>
+        </section>
+    </div>
 
 
-
-
-        </md-content>
-
-    </section>
-</div>
+</md-content>
 
 
 

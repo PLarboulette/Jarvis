@@ -27,12 +27,10 @@ public class ProjectServiceImpl implements ProjectService {
         ArrayList<String> keysProject = new ArrayList<>();
 
         for (String keyProject :  listIDsProject) {
-            if (!keysProject.contains(keyProject)) {
-                keysProject.add(keyProject);
                 Project projectTemp = Redis.getProjectFromID(keyProject);
                 result.add(projectTemp);
 
-            }
+
         }
         return result;
     }
@@ -77,20 +75,18 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void updateProject(Project project, String idUser) {
         String idProject = project.getId();
-        Redis.deleteKey("Project", idProject);
-        HashMap<String,String> projectProperties = new HashMap<String,String>();
-        projectProperties.put("projectId", String.valueOf(idProject));
-        projectProperties.put("projectName", project.getName());
-        projectProperties.put("projectDescription",project.getDescription());
-        projectProperties.put("projectBeginDate", project.getBeginDate());
-        projectProperties.put("projectEndDate", project.getEndDate());
-        projectProperties.put("projectTasks", "Tasks : " + String.valueOf(idProject));
+
+        Redis.setValueToHash("Project : " + idProject, "projectName", project.getName());
+        Redis.setValueToHash("Project : " + idProject, "projectDescription", project.getDescription());
+        Redis.setValueToHash("Project : " + idProject, "projectBeginDate", project.getBeginDate());
+        Redis.setValueToHash("Project : " + idProject, "projectEndDate", project.getEndDate());
+        Redis.setValueToHash("Project : " + idProject, "projectName", project.getName());
+
         String technologies = "";
         for (String s : project.getTechnologies()) {
             technologies += s +";";
         }
-        projectProperties.put("projectAchieved","false");
-        projectProperties.put("projectTechnologies",technologies);
-        Redis.insertHash("Project", idProject, projectProperties);
+       Redis.setValueToHash("Project : " + idProject, "projectAchieved", project.getAchieved());
+        Redis.setValueToHash("Project : " + idProject, "projectTechnologies", technologies);
     }
 }

@@ -177,6 +177,7 @@ public class Redis implements ServletContextListener {
      * @return
      */
     public static Task getTaskFromID (String id) {
+
         Task task = new Task();
         Map<String,String> taskProperties = jedis.hgetAll(id);
         for (String key : taskProperties.keySet()) {
@@ -202,6 +203,10 @@ public class Redis implements ServletContextListener {
             }
         }
         return task;
+    }
+
+    public static void setValueToHash (String id, String key, String value){
+        jedis.hset(id,key,value);
     }
 
 
