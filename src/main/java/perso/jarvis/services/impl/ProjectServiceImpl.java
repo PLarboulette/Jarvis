@@ -27,8 +27,11 @@ public class ProjectServiceImpl implements ProjectService {
         ArrayList<String> keysProject = new ArrayList<>();
 
         for (String keyProject :  listIDsProject) {
+            if ( !keysProject.contains(keyProject)) {
+                keysProject.add(keyProject);
                 Project projectTemp = Redis.getProjectFromID(keyProject);
                 result.add(projectTemp);
+            }
 
 
         }

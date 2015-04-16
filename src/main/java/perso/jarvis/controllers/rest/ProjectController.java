@@ -59,10 +59,10 @@ public class ProjectController {
         return result;
     }
 
-    @RequestMapping(value="/user/userID/project/idProject",method=RequestMethod.GET)
-    public @ResponseBody Project getProject (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value="/user/userID/project/{idProject}",method=RequestMethod.GET)
+    public @ResponseBody Project getProject (@PathVariable("idProject") String idProject, HttpServletRequest request, HttpServletResponse response) {
         String projectID = request.getParameter("projectID");
-        return projectService.getProject(projectID);
+        return projectService.getProject(idProject);
     }
 
     @RequestMapping(value="/user/userID/project", method=RequestMethod.PUT)

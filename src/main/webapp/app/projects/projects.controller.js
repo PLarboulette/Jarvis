@@ -12,9 +12,9 @@
         .module('JarvisApp')
         .controller('ProjectsController', projectsController);
 
-    projectsController.$inject = ['$scope', '$location','$log','Projects','$http','$mdSidenav', '$route'];
+    projectsController.$inject = ['$scope', '$location','$log','Projects','$http','$mdSidenav', '$route', '$mdDialog'];
 
-    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav, $route) {
+    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav, $route, $mdDialog) {
 
         $scope.project = {
             projectNameSettings : "",
@@ -23,6 +23,10 @@
             projectEndDateSettings : "",
             projectTechnologiesSettings : "",
             projectAchievedSettings : ""
+        }
+
+        $scope.task = {
+
         }
 
         loadProjects();
@@ -59,21 +63,38 @@
                         } );
                     }
                     $scope.tabs = tabs;
-                    $scope.selectedIndex =  1 ;
+                    $scope.selectedIndex =  0 ;
                     $scope.$watch('selectedIndex', function(current, old){
-                        if (selected != null) {
-                            previous = selected;
-                        }
+
+                        previous = selected;
+
                         selected = tabs[current];
                         $scope.idProject = tabs[current]['id'];
+                        loadProject();
                     });
+
                 });
         };
+
+        function loadProject () {
+            $http.get("rest/user/userID/project/"+$scope.idProject).
+                success(function(data, status, headers, config) {
+
+                    //console.log(data);
+                    console.log(data)['listTasks'];
+
+                    $scope.messages = data;
+
+                });
+        }
+
+
 
 
         $scope.closeProjectSettings = function() {
             $mdSidenav('projectSettings').close()
                 .then(function(){
+
 
                 });
         };
@@ -82,7 +103,7 @@
             $mdSidenav('projectSettings').toggle()
                 .then(function(){
                     var idProject  = $scope.idProject;
-                    $http.get("rest/user/userID/project/idProject",{params : {"projectID" : idProject}} ).
+                    $http.get("rest/user/userID/project/"+$scope.idProject ).
                         success(function(data) {
 
                             console.log(data);
@@ -128,7 +149,18 @@
 
 
 
-
+        $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: 'ProjectsController',
+                templateUrl: 'app/projects/addTask.tmpl.html',
+                targetEvent: ev,
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        };
 
 
 
