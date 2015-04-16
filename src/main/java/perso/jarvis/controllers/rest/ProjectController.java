@@ -62,7 +62,6 @@ public class ProjectController {
     @RequestMapping(value="/user/userID/project/idProject",method=RequestMethod.GET)
     public @ResponseBody Project getProject (HttpServletRequest request, HttpServletResponse response) {
         String projectID = request.getParameter("projectID");
-        System.out.println(projectID);
         return projectService.getProject(projectID);
     }
 

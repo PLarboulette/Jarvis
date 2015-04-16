@@ -77,11 +77,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void updateProject(Project project, String idUser) {
         String idProject = project.getId();
-
         Redis.deleteKey("Project", idProject);
-
-
-
         HashMap<String,String> projectProperties = new HashMap<String,String>();
         projectProperties.put("projectId", String.valueOf(idProject));
         projectProperties.put("projectName", project.getName());
@@ -95,8 +91,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
         projectProperties.put("projectAchieved","false");
         projectProperties.put("projectTechnologies",technologies);
-        addProjectForUser(String.valueOf(idProject), idUser);
         Redis.insertHash("Project", idProject, projectProperties);
-
     }
 }

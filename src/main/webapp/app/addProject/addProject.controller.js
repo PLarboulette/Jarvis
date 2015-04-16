@@ -23,13 +23,14 @@
     }
 
     $scope.createProject = function() {
-        console.log("OK");
         var projectToCreate = {};
         projectToCreate.name = $scope.project.projectName;
         projectToCreate.description = $scope.project.projectDescription;
         projectToCreate.beginDate = $scope.project.projectBeginDate;
         projectToCreate.endDate = $scope.project.projectEndDate;
-        projectToCreate.technologies =  ["Java"];
+        var technologies = $scope.project.projectTechnologies;
+        var tabTechnologies = technologies.split(";");
+        projectToCreate.technologies =  tabTechnologies;
 
 
 

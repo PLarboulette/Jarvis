@@ -88,6 +88,11 @@
                             $scope.project.projectDescriptionSettings  = data['description'];
                             $scope.project.projectBeginDateSettings = data['beginDate'];
                             $scope.project.projectEndDateSettings = data['endDate'];
+                            var tabTechnologies = data['technologies'];
+                            console.log(tabTechnologies);
+                            /*for (int i = 0; i < tabTechnologes.length; i++) {
+                                $scope.project.projectTechnologiesSettings += tabTechnologes[i];
+                            }*/
                            // $scope.project.projectTechnologiesSettings =
 
                         }).
