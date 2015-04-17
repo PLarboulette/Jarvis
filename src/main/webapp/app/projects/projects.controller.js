@@ -25,20 +25,22 @@
             projectAchievedSettings : ""
         }
 
-        $scope.task = {
+        // Takes the id of the selected project
+        $scope.idProject = 0;
 
+        $scope.task = {
+            taskName : "",
+            taskText : "",
+            taskBeginDate : "",
+            taskEndDate : "",
+            taskDuration : "",
+            taskAchieved : ""
         }
 
+        // displays tabs for projects
         loadProjects();
 
-        $scope.addTab = function (title, view) {
-            view = view || title + " Content View";
-            tabs.push({ title: title, content: view, disabled: false});
-        };
-        $scope.removeTab = function (tab) {
-            var index = tabs.indexOf(tab);
-            tabs.splice(index, 1);
-        };
+
 
 
 
@@ -48,14 +50,13 @@
 
         }
 
-        $scope.idProject = 0;
-
+        // Load the projects (All the projects, not only for the selected user --> TO DO)
         function loadProjects () {
             $http.get("rest/user/userID/project").
-                success(function(data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    var tabs = [],selected = null, previous = null;
+                success(function(data) {
+                    var tabs = [],
+                        selected = null,
+                        previous = null;
                     for (var i = 0 ; i < data.length; i++) {
                         tabs.push( {title: data[i]['name'],
                             content: data[i]['description'],
@@ -65,23 +66,20 @@
                     $scope.tabs = tabs;
                     $scope.selectedIndex =  0 ;
                     $scope.$watch('selectedIndex', function(current, old){
-
                         previous = selected;
-
                         selected = tabs[current];
                         $scope.idProject = tabs[current]['id'];
                         loadProject();
                     });
-
                 });
         };
 
+        // load data of the selected project in the tabs
         function loadProject () {
             $http.get("rest/user/userID/project/"+$scope.idProject).
                 success(function(data, status, headers, config) {
 
-                    //console.log(data);
-                    console.log(data)['listTasks'];
+                    console.log(data);
 
                     $scope.messages = data;
 
@@ -90,24 +88,17 @@
 
 
 
-
+        // Close the sidenav of the project's settings
         $scope.closeProjectSettings = function() {
-            $mdSidenav('projectSettings').close()
-                .then(function(){
-
-
-                });
+            $mdSidenav('projectSettings').close();
         };
 
+        // Display the settings of the selected project
         $scope.toggleProjectSettings = function() {
             $mdSidenav('projectSettings').toggle()
                 .then(function(){
-                    var idProject  = $scope.idProject;
                     $http.get("rest/user/userID/project/"+$scope.idProject ).
                         success(function(data) {
-
-                            console.log(data);
-
                             $scope.project.projectNameSettings = data['name'];
                             $scope.project.projectDescriptionSettings  = data['description'];
                             $scope.project.projectBeginDateSettings = data['beginDate'];
@@ -119,12 +110,11 @@
                             }
                             $scope.project.projectTechnologiesSettings = technologiesForInput;
                             $scope.project.projectAchievedSettings = data['achieved'] == "true";
-
                         });
-
                 });
         };
 
+        // save the new settings of the project
         $scope.saveProjectSettings = function () {
             var projectToCreate = {};
             projectToCreate.name = $scope.project.projectNameSettings;
@@ -148,8 +138,8 @@
         }
 
 
-
-        $scope.showAdvanced = function(ev) {
+        // Display the dialog to add a task to the selected project
+        $scope.showAddTask = function(ev) {
             $mdDialog.show({
                 controller: 'ProjectsController',
                 templateUrl: 'app/projects/addTask.tmpl.html',
@@ -161,6 +151,22 @@
                     $scope.alert = 'You cancelled the dialog.';
                 });
         };
+
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.addTask = function(answer) {
+
+            var taskToCreate = {};
+            taskToCreate.name = $scope.task.taskName;
+            taskToCreate.description =$scope.task.
+
+            console.log("ok");
+
+            $mdDialog.hide(answer);
+        };
+
 
 
 

@@ -1,20 +1,47 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog style="width: 500px">
     <md-content class="sticky-container">
         <md-subheader class="md-sticky-no-effect"> Ajouter une tâche</md-subheader>
         <div class="dialog-content">
+            <div layout="column" layout-align="start left">
+                <form name="addProjectForm">
+                    <div layout="column">
 
+                        <md-input-container layout="column">
+                            <label>Nom de la tâche</label>
+                            <input type="text" ng-model="task.taskName">
+                        </md-input-container>
+
+                        <md-input-container layout="column">
+                            <label>Description de la tâche</label>
+                            <input type="text" ng-model="task.taskDescription">
+                        </md-input-container>
+
+                        <md-input-container layout="column">
+                            <label>Date de début</label>
+                            <input type="text" ng-model="task.taskBeginDate">
+                        </md-input-container>
+
+                        <md-input-container layout="column">
+                            <label>Date de fin</label>
+                            <input type="text" ng-model="task.taskEndDate">
+                        </md-input-container>
+
+                        <md-input-container layout="column">
+                            <label>Durée estimée</label>
+                            <input type="text" ng-model="task.taskDuration">
+                        </md-input-container>
+
+                    </div>
+                </form>
+            </div>
         </div>
     </md-content>
+
+    <!--Add and cancel-->
     <div class="md-actions" layout="row">
-        <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank"  show-md>
-            More on Wikipedia
-        </md-button>
         <span flex></span>
-        <md-button ng-click="answer('not useful')">
-            Not Useful
-        </md-button>
-        <md-button ng-click="answer('useful')" class="md-primary">
-            Useful
-        </md-button>
+        <md-buttosn ng-click="addTask()"> Créer la tâche </md-buttosn>
+        <md-button ng-click="cancel()" class="md-primary"> Annuler </md-button>
     </div>
+
 </md-dialog>

@@ -29,7 +29,7 @@
             <br>
 
             <!--Display dialog to add a task -->
-            <md-button class="md-primary" ng-click="showAdvanced($event)"> Ajouter ûne tache </md-button>
+            <md-button class="md-primary" ng-click="showAddTask($event)"> Ajouter ûne tache </md-button>
             <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
                <!-- <div ng-bind="tab.content"></div>
                 <div ng-bind="tab.id"></div>-->
@@ -39,13 +39,11 @@
                         <span>Tâches</span>
                     </h2>
                 </md-toolbar>
-
                 <md-content>
                     <md-list>
                         <md-list-item class="md-5-line" ng-repeat="item in messages">
                             <div class="md-list-item-text">
                                 <h3>{{item}}</h3>
-
                             </div>
                             <md-divider ng-if="!$last"></md-divider>
                         </md-list-item>

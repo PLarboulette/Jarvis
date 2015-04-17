@@ -16,6 +16,8 @@ public class Task {
     private String beginDate;
     private String endDate;
     private String duration;
+    private  String achieved;
+
 
 
     public String getId() {
@@ -66,5 +68,12 @@ public class Task {
         this.duration = duration;
     }
 
+    public String getAchieved() {
+        return achieved;
+    }
+
+    public void setAchieved(String achieved) {
+        this.achieved = achieved;
+    }
 }
 
