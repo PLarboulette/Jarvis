@@ -37,7 +37,6 @@ public class ProjectController {
     @RequestMapping(value="user/{userID}/project", method= RequestMethod.POST)
     public void createProject (@PathVariable("userID") String idUser, @RequestBody Project project, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createProject");
-
         projectService.createProject(project,"Login");
     }
 
@@ -67,6 +66,9 @@ public class ProjectController {
 
     @RequestMapping(value="/user/userID/project", method=RequestMethod.PUT)
     public @ResponseBody void updateProject (@RequestBody Project project,HttpServletRequest request, HttpServletResponse response) {
+
+        System.out.println(project.getTechnologies());
+
 
         projectService.updateProject(project, "Login");
     }

@@ -33,26 +33,11 @@ public class TaskController {
      * @param request
      * @param httpServletResponse
      */
-    @RequestMapping(value="/tasks", method= RequestMethod.POST)
+    @RequestMapping(value="/user/{userID}/project/{projectID}/task", method= RequestMethod.POST)
     public @ResponseBody
-    void createTask (HttpServletRequest request, HttpServletResponse httpServletResponse) {
+    void createTask (@PathVariable("userID") String userID, @PathVariable("projectID") String projectID, @RequestBody Task task, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createTask");
-
-        BufferedReader br = null;
-        String json = "";
-
-        try {
-            br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            if(br != null){
-                json = br.readLine();
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            Task task = mapper.readValue(json, Task.class);
-            taskService.createTask(task);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       taskService.createTask("Login",projectID,task);
     }
 
     @RequestMapping(value="project/{projectId}/tasks", method= RequestMethod.GET)

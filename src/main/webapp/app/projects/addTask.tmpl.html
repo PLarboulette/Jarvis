@@ -13,7 +13,7 @@
 
                         <md-input-container layout="column">
                             <label>Description de la tâche</label>
-                            <input type="text" ng-model="task.taskDescription">
+                            <input type="text" ng-model="task.taskText">
                         </md-input-container>
 
                         <md-input-container layout="column">
@@ -40,7 +40,7 @@
     <!--Add and cancel-->
     <div class="md-actions" layout="row">
         <span flex></span>
-        <md-buttosn ng-click="addTask()"> Créer la tâche </md-buttosn>
+        <md-button ng-click="addTask()"> Créer la tâche </md-button>
         <md-button ng-click="cancel()" class="md-primary"> Annuler </md-button>
     </div>
 

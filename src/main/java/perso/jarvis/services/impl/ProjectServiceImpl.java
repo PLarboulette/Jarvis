@@ -50,12 +50,8 @@ public class ProjectServiceImpl implements ProjectService {
         projectProperties.put("projectBeginDate", project.getBeginDate());
         projectProperties.put("projectEndDate", project.getEndDate());
         projectProperties.put("projectTasks", "Tasks : " + String.valueOf(project.hashCode()));
-        String technologies = "";
-        for (String s : project.getTechnologies()) {
-            technologies += s +";";
-        }
         projectProperties.put("projectAchieved","false");
-        projectProperties.put("projectTechnologies",technologies);
+        projectProperties.put("projectTechnologies",project.getTechnologies());
         addProjectForUser(String.valueOf(project.hashCode()), idUser);
         Redis.insertHash("Project", String.valueOf(project.hashCode()), projectProperties);
     }
@@ -79,17 +75,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProject(Project project, String idUser) {
         String idProject = project.getId();
 
+        System.out.println(project.getTechnologies());
+
         Redis.setValueToHash("Project : " + idProject, "projectName", project.getName());
         Redis.setValueToHash("Project : " + idProject, "projectDescription", project.getDescription());
         Redis.setValueToHash("Project : " + idProject, "projectBeginDate", project.getBeginDate());
         Redis.setValueToHash("Project : " + idProject, "projectEndDate", project.getEndDate());
-        Redis.setValueToHash("Project : " + idProject, "projectName", project.getName());
+        Redis.setValueToHash("Project : " + idProject, "projectTechnologies", project.getTechnologies());
 
-        String technologies = "";
-        for (String s : project.getTechnologies()) {
-            technologies += s +";";
-        }
-       Redis.setValueToHash("Project : " + idProject, "projectAchieved", project.getAchieved());
-        Redis.setValueToHash("Project : " + idProject, "projectTechnologies", technologies);
+        Redis.setValueToHash("Project : " + idProject, "projectAchieved", project.getAchieved());
     }
 }

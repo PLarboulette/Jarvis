@@ -15,7 +15,7 @@ public class TaskServiceImpl implements TaskService {
      * State : OK (01/04/2015)
      * @param task task to save in database
      */
-    public void createTask(Task task) {
+    public void createTask(String userID, String projectID, Task task) {
         HashMap<String,String> taskProperties = new HashMap<String,String>();
         taskProperties.put("taskId",String.valueOf(task.hashCode()));
         taskProperties.put("taskName",task.getName());
@@ -23,7 +23,8 @@ public class TaskServiceImpl implements TaskService {
         taskProperties.put("taskBeginDate",task.getBeginDate());
         taskProperties.put("taskEndDate",task.getEndDate());
         taskProperties.put("taskDuration",task.getDuration());
-        Redis.insertHash("Task",String.valueOf(task.hashCode()), taskProperties);
+        Redis.insertHash("Task", String.valueOf(task.hashCode()), taskProperties);
+        addTaskForProject(String.valueOf(task.hashCode()), projectID);
     }
 
     /**
