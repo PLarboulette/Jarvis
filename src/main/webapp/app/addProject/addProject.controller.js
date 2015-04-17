@@ -14,33 +14,14 @@
 
     function addProjectController($scope, $location, $log, Projects, $http, $route){
 
-    $scope.project = {
-        projectName : "",
-        projectDescription : "",
-        projectBeginDate : "",
-        projectEndDate :"",
-        projectTechnologies : ""
-    }
-
-    $scope.createProject = function() {
-        var projectToCreate = {};
-        projectToCreate.name = $scope.project.projectName;
-        projectToCreate.description = $scope.project.projectDescription;
-        projectToCreate.beginDate = $scope.project.projectBeginDate;
-        projectToCreate.endDate = $scope.project.projectEndDate;
-        var technologies = $scope.project.projectTechnologies;
-        var tabTechnologies = technologies.split(";");
-        projectToCreate.technologies =  tabTechnologies;
+        $scope.project = {};
 
 
-
-        $http.post('rest/user/userID/project', projectToCreate).
-            success(function(data, status, headers, config) {
-                $route.reload();
-                $location.path('projects');
-            });
-
-    }
+        $scope.createProject = function() {
+            Projects.saveProject($scope.project);
+            $route.reload();
+            $location.path('projects');
+        }
 
     };
 

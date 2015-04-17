@@ -20,7 +20,7 @@ public interface ProjectService {
 
     Project getProject(String idProject);
 
-    void updateProject(Project project, String idUser);
+    void updateProject(String projectId,Project project, String idUser);
 
 
 

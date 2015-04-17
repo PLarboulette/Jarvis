@@ -37,6 +37,7 @@ public class TaskController {
     public @ResponseBody
     void createTask (@PathVariable("userID") String userID, @PathVariable("projectID") String projectID, @RequestBody Task task, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createTask");
+        System.out.println(projectID);
        taskService.createTask("Login",projectID,task);
     }
 

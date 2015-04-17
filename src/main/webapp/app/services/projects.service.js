@@ -12,13 +12,26 @@
     projects.$inject = ['$resource'];
 
     function projects($resource) {
+
         return {
-            saveProject: saveProject
+            saveProject: saveProject,
+            updateProject : updateProject,
+            getProjects : getProjects
         };
 
         function saveProject(project) {
-            $resource('rest/user/userID/project', {userID:'@id'}).save(project);
+            $resource('rest/user/userID/project').save(project);
         }
+
+        function updateProject (project,projectID) {
+            $resource('rest/user/userID/project/'+projectID).save(project);
+        }
+
+        function getProjects () {
+         return $resource('rest/user/userID/project').query();
+
+        }
+
     }
 })();
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,6 +56,9 @@ public class ProjectController {
         logger.info("getProjects");
         userId="Login";
         List<Project> result = projectService.getProjects(userId);
+
+        System.out.println("NB projects :"+result.size());
+
         return result;
     }
 
@@ -64,13 +68,9 @@ public class ProjectController {
         return projectService.getProject(idProject);
     }
 
-    @RequestMapping(value="/user/userID/project", method=RequestMethod.PUT)
-    public @ResponseBody void updateProject (@RequestBody Project project,HttpServletRequest request, HttpServletResponse response) {
-
-        System.out.println(project.getTechnologies());
-
-
-        projectService.updateProject(project, "Login");
+    @RequestMapping(value="/user/userID/project/{projectID}", method=RequestMethod.POST)
+    public @ResponseBody void updateProject (@PathVariable("projectID") String projectID,@RequestBody Project project,HttpServletRequest request, HttpServletResponse response) {
+        projectService.updateProject(projectID,project, "Login");
     }
 
 

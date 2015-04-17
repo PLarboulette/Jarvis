@@ -176,7 +176,6 @@ public class Redis implements ServletContextListener {
 
         Task task = new Task();
         Map<String,String> taskProperties = jedis.hgetAll(id);
-        System.out.println(taskProperties.size());
         for (String key : taskProperties.keySet()) {
             switch (key) {
                 case "taskId" :

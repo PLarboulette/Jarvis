@@ -25,7 +25,7 @@
 <md-content flex layout-padding>
 
     <md-tabs md-selected="selectedIndex" md-border-bottom>
-        <md-tab ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.title}}">
+        <md-tab ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.name}}">
             <br>
 
             <!--Display dialog to add a task -->
@@ -41,7 +41,7 @@
                 </md-toolbar>
                 <md-content>
                     <md-list>
-                        <md-list-item class="md-5-line" ng-repeat="item in messages">
+                        <md-list-item class="md-5-line" ng-repeat="task in tasks">
                             <div class="md-list-item-text">
                                 <h3>{{item}}</h3>
                             </div>
@@ -66,6 +66,8 @@
                 </md-toolbar>
                 <md-content  layout-padding>
                     <form>
+
+
                         <md-input-container>
                             <label for="projectName">Nom</label>
                             <input type="text" id="projectName" ng-model="project.name"
