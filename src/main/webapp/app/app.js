@@ -12,7 +12,8 @@
             'ngRoute',
             'ngMaterial',
             'ngMessages',
-            'ngResource'
+            'ngResource',
+            'ngMdIcons'
         ])
         .config(config)
 

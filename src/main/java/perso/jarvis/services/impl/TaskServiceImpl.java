@@ -23,6 +23,7 @@ public class TaskServiceImpl implements TaskService {
         taskProperties.put("taskBeginDate",task.getBeginDate());
         taskProperties.put("taskEndDate",task.getEndDate());
         taskProperties.put("taskDuration",task.getDuration());
+        taskProperties.put("taskAchieved","false");
         Redis.insertHash("Task", String.valueOf(task.hashCode()), taskProperties);
         addTaskForProject(String.valueOf(task.hashCode()), projectID);
     }

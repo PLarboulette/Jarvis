@@ -155,10 +155,17 @@ public class Redis implements ServletContextListener {
                 case "projectTasks" :
                     List<String> listIDTasks = Redis.getList(projectProperties.get(key));
                     ArrayList<Task> listTasksForProject = new ArrayList<Task>();
+                    ArrayList<String> keysTask = new ArrayList<>();
                     for (String idTask : listIDTasks) {
-                        Task taskTemp = getTaskFromID(idTask);
-                        listTasksForProject.add(taskTemp);
+                        if (!keysTask.contains(idTask)) {
+                            keysTask.add(idTask);
+                            Task taskTemp = getTaskFromID(idTask);
+                            listTasksForProject.add(taskTemp);
+                        }
+
                     }
+
+                    System.out.println(listTasksForProject.size());
 
                     project.setListTasks(listTasksForProject);
                     break;
@@ -175,7 +182,7 @@ public class Redis implements ServletContextListener {
     public static Task getTaskFromID (String id) {
 
         Task task = new Task();
-        Map<String,String> taskProperties = jedis.hgetAll(id);
+        Map<String,String> taskProperties = jedis.hgetAll("Task : "+id);
         for (String key : taskProperties.keySet()) {
             switch (key) {
                 case "taskId" :
@@ -195,6 +202,9 @@ public class Redis implements ServletContextListener {
                     break;
                 case "taskDuration" :
                     task.setDuration(taskProperties.get(key));
+                    break;
+                case "taskAchieved" :
+                    task.setAchieved(taskProperties.get(key));
                     break;
             }
         }

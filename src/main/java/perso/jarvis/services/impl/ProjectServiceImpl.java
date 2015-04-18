@@ -73,14 +73,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateProject(String projectID,Project project, String idUser) {
-
-
         Redis.setValueToHash("Project : " + projectID, "projectName", project.getName());
         Redis.setValueToHash("Project : " + projectID, "projectDescription", project.getDescription());
         Redis.setValueToHash("Project : " + projectID, "projectBeginDate", project.getBeginDate());
         Redis.setValueToHash("Project : " + projectID, "projectEndDate", project.getEndDate());
         Redis.setValueToHash("Project : " + projectID, "projectTechnologies", project.getTechnologies());
-
         Redis.setValueToHash("Project : " + projectID, "projectAchieved", project.getAchieved());
     }
 }

@@ -10,9 +10,11 @@
         .module('JarvisApp')
         .controller('ProjectsController', projectsController);
 
-    projectsController.$inject = ['$scope', '$location', '$log', 'Projects', '$http', '$mdSidenav', '$route', '$mdDialog','Tasks','$rootScope'];
+    projectsController.$inject = ['$scope', '$location', '$log', 'Projects', '$http',
+        '$mdSidenav', '$route', '$mdDialog','Tasks','$rootScope'];
 
-    function projectsController($scope, $location, $log, Projects, $http, $mdSidenav, $route, $mdDialog, Tasks, $rootScope) {
+    function projectsController($scope, $location, $log, Projects, $http,
+                                $mdSidenav, $route, $mdDialog, Tasks, $rootScope) {
 
         $scope.project = {};
 
@@ -34,6 +36,7 @@
             $scope.project.achieved = tabs[$scope.selectedIndex]['achieved'];
             $rootScope.idProject = tabs[$scope.selectedIndex]['id'];
             $scope.tasks = tabs[$scope.selectedIndex]['listTasks'];
+
         });
 
         $scope.toggleProjectSettings = function () {
