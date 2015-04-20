@@ -33,7 +33,7 @@
             $scope.project.beginDate = tabs[$scope.selectedIndex]['beginDate']; ;
             $scope.project.endDate = tabs[$scope.selectedIndex]['endDate'];
             $scope.project.technologies = tabs[$scope.selectedIndex]['technologies'];
-            $scope.project.achieved = tabs[$scope.selectedIndex]['achieved'];
+            $scope.project.achieved = tabs[$scope.selectedIndex]['achieved']=='true';
             $rootScope.idProject = tabs[$scope.selectedIndex]['id'];
             $scope.tasks = tabs[$scope.selectedIndex]['listTasks'];
 
