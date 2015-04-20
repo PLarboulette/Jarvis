@@ -29,7 +29,7 @@
             <br>
 
             <!--Display dialog to add a task -->
-            <md-button class="md-primary" ng-click="showAddTask($event)"> Ajouter ûne tache </md-button>
+            <md-button class="md-primary" ng-click="showAddTask($event)"> Ajouter une tâche </md-button>
             <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
                 <!-- <div ng-bind="tab.content"></div>
                  <div ng-bind="tab.id"></div>-->
@@ -42,22 +42,46 @@
                 <md-content>
                     <md-list>
                         <md-list-item class="md-5-line" ng-repeat="task in tasks">
-                            <span ng-if="task.achieved=='true'" class="animate-if">
-                                     <ng-md-icon icon="send"></ng-md-icon>
-                            </span>
 
-                            <div class="md-list-item-text">
-                                <h3>{{ task.name }}</h3>
-                                <h4>{{ task.text }}</h4>
-                                <p>{{ task.duration }}</p>
-                            </div>
+                            <!--<md-gid-list md-cols="1" md-row-height="fit" style="height: 400px;">
+                                <md-grid-tile class="gray"
+                                              md-rowspan="2" md-colspan="1">
 
-                            <md-divider ng-if="!$last"></md-divider>
+                                    <span ng-if="task.achieved=='true'" class="animate-if">
+                                            <ng-md-icon icon="send"></ng-md-icon>
+                                        </span>
+
+                                    <div class="md-list-item-text">
+                                        <h3>{{ task.name }}</h3>
+                                        <h4>{{ task.text }}</h4>
+                                        <p>{{ task.duration }}</p>
+                                    </div>
+
+                                    <md-grid-tile-footer>
+                                        <p>
+                                            Coucou
+                                        </p>
+                                    </md-grid-tile-footer>
+                                </md-grid-tile>
+                            </md-grid-list>-->
+
+                            <md-grid-list md-cols-sm="10" md-cols-md="10" md-cols-gt-md="10" md-row-height-gt-md="1:1"
+                                          md-row-height="1:1" md-gutter="12px" md-gutter-gt-sm="8px" >
+                                <md-grid-tile class="gray" md-rowspan="0" md-colspan="1" md-colspan-sm="1">
+                                    <md-grid-tile-footer>
+                                        <p>Test 1</p>
+                                    </md-grid-tile-footer>
+                                </md-grid-tile>
+
+                                <md-grid-tile class="gray" md-rowspan="0" md-colspan="9" md-colspan-sm="9">
+                                    <md-grid-tile-footer>
+                                        <p>Test 2</p>
+                                    </md-grid-tile-footer>
+                                </md-grid-tile>
+                            </md-grid-list>
                         </md-list-item>
                     </md-list>
                 </md-content>
-
-
                 <br/>
                 <!--<md-button class="md-primary md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button>-->
             </div>
