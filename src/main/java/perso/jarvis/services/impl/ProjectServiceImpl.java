@@ -32,8 +32,6 @@ public class ProjectServiceImpl implements ProjectService {
                 Project projectTemp = Redis.getProjectFromID(keyProject);
                 result.add(projectTemp);
             }
-
-
         }
         return result;
     }
@@ -63,7 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
      * @param userId user's id
      */
     public void addProjectForUser(String projectId, String userId) {
-
         Redis.insertList("Projects",userId,projectId);
     }
 

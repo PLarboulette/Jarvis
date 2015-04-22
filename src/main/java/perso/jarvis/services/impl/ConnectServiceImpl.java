@@ -33,7 +33,6 @@ public class ConnectServiceImpl implements ConnectService {
                     break;
                 }
             }
-
         }
         return authorized;
     }

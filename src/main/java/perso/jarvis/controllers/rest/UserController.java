@@ -40,11 +40,7 @@ public class UserController {
     @RequestMapping(value="/users", method= RequestMethod.POST)
     public void createUser (@RequestBody User user,HttpServletRequest request, HttpServletResponse response) {
         logger.info("createUser");
-
         userService.createUser(user);
-
-
-
     }
 
     /**
@@ -56,9 +52,5 @@ public class UserController {
     public void getUsers (HttpServletRequest request, HttpServletResponse response) {
         List<User> listUsers = userService.getUsers();
     }
-
-
-
-
 
 }

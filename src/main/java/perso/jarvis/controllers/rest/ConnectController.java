@@ -29,7 +29,6 @@ public class ConnectController {
     @Resource
     ConnectService connectService;
 
-
     private Logger logger = Logger.getLogger(ConnectController.class);
 
     @RequestMapping( method=RequestMethod.POST, value="/connect")
@@ -50,15 +49,5 @@ public class ConnectController {
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
-
-
-
-
-
-
-
     }
-
-
-
 }

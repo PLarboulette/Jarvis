@@ -15,7 +15,7 @@
     function addUserConttroller($scope, $location, $log, Projects, $http, $route){
 
 
-
+        // TO DO  --> Service et pas http !
         $scope.submit = function() {
 
             var userToCreate = {};

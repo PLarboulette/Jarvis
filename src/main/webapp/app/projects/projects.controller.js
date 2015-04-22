@@ -10,15 +10,13 @@
         .module('JarvisApp')
         .controller('ProjectsController', projectsController);
 
-    projectsController.$inject = ['$scope', '$location', '$log', 'Projects', '$http',
+    projectsController.$inject = ['$scope', '$location', '$log', 'Projects',
         '$mdSidenav', '$route', '$mdDialog','Tasks','$rootScope'];
 
-    function projectsController($scope, $location, $log, Projects, $http,
+    function projectsController($scope, $location, $log, Projects,
                                 $mdSidenav, $route, $mdDialog, Tasks, $rootScope) {
 
         $scope.project = {};
-
-        // Takes the id of the selected project
 
         $scope.task = {};
 

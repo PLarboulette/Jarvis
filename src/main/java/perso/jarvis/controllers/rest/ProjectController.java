@@ -73,10 +73,6 @@ public class ProjectController {
         projectService.updateProject(projectID,project, "Login");
     }
 
-
-
-
-
    /* *//**
      *
      * @param id user's id

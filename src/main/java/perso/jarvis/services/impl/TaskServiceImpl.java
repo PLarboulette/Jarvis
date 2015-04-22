@@ -35,6 +35,5 @@ public class TaskServiceImpl implements TaskService {
      */
     public void addTaskForProject(String taskId, String projectId) {
         Redis.insertList("Tasks",projectId,taskId);
-
     }
 }
