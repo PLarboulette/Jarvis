@@ -10,7 +10,7 @@
 
 
     <listener>
-        <listener-class>perso.jarvis.redis.Redis</listener-class>
+        <listener-class>perso.jarvis.mongo.Mongo</listener-class>
     </listener>
 
     <servlet-mapping>

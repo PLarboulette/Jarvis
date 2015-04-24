@@ -20,7 +20,7 @@
         };
 
         function saveProject(project) {
-            $resource('rest/user/userID/project').save(project);
+            $resource('rest/user/'+$rootScope.login+'/userID/project').save(project);
         }
 
         function updateProject (project,projectID) {

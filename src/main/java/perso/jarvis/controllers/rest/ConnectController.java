@@ -1,6 +1,5 @@
 package perso.jarvis.controllers.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,16 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import perso.jarvis.beans.User;
-import perso.jarvis.redis.Redis;
 import perso.jarvis.services.ConnectService;
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -29,7 +23,7 @@ public class ConnectController {
     @Resource
     ConnectService connectService;
 
-    private Logger logger = Logger.getLogger(ConnectController.class);
+    private final Logger logger = Logger.getLogger(ConnectController.class);
 
     @RequestMapping( method=RequestMethod.POST, value="/connect")
     public @ResponseBody
@@ -42,7 +36,7 @@ public class ConnectController {
 
         if (authorized) {
             String token = UUID.randomUUID().toString();
-            request.getSession(true).setAttribute("token",token);;
+            request.getSession(true).setAttribute("token",token);
             request.getSession(true).setAttribute("user",user);
             connectService.addToken(token,user);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);

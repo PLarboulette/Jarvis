@@ -6,27 +6,22 @@ package perso.jarvis.controllers.rest;
 
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import perso.jarvis.beans.Project;
 import perso.jarvis.beans.User;
 import perso.jarvis.services.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 
 @Controller
 public class UserController {
 
-    Logger logger = Logger.getLogger(UserController.class);
+    private final Logger logger = Logger.getLogger(UserController.class);
 
 
     @Resource

@@ -16,6 +16,7 @@ public class Redis implements ServletContextListener {
 
     private static Jedis jedis;
 
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Redis.class);
 
     public void contextInitialized(ServletContextEvent sce) {
         jedis = new Jedis("localhost");
@@ -46,29 +47,28 @@ public class Redis implements ServletContextListener {
         jedis.lpush(type + " : " + idKey, idValue);
     }
 
-    /**
-     * State : ??
-     * @param type User, Project, Task or Training
-     * @param id id of the object to delete
-     */
-    public static void deleteKey (String type, String id) {
-        jedis.del(type + " : " + id);
-    }
+// --Commented out by Inspection START (24/04/2015 14:10):
+//    /**
+//     * State : ??
+//     * @param type User, Project, Task or Training
+//     * @param id id of the object to delete
+//     */
+//    public static void deleteKey (String type, String id) {
+//        jedis.del(type + " : " + id);
+//    }
+// --Commented out by Inspection STOP (24/04/2015 14:10)
 
 
     /**
      * State : OK (01/04/2015)
-     * @param type User, Project, Task or Training
      * @return a Set of all the objects of the given type stored in database
      */
-    public static Set getDatas (String type) {
-        Set result = jedis.keys(type + " : *");
-        return result;
+    public static Set getDatas() {
+        return jedis.keys("User" + " : *");
     }
 
     public static  Map<String,String> getHash (String id) {
-        Map<String,String> result = jedis.hgetAll(id);
-        return result;
+        return jedis.hgetAll(id);
     }
 
     /**
@@ -108,7 +108,7 @@ public class Redis implements ServletContextListener {
                     break;
                 case "userProjects" :
                     List<String> listProjects = Redis.getList(userProperties.get(key));
-                    ArrayList<Project> listProjectsForUser = new ArrayList<Project>();
+                    ArrayList<Project> listProjectsForUser = new ArrayList<>();
                     for (String idProject : listProjects) {
                         Project projectTemp = getProjectFromID(idProject);
                         listProjectsForUser.add(projectTemp);
@@ -154,18 +154,15 @@ public class Redis implements ServletContextListener {
                     break;
                 case "projectTasks" :
                     List<String> listIDTasks = Redis.getList(projectProperties.get(key));
-                    ArrayList<Task> listTasksForProject = new ArrayList<Task>();
+                    ArrayList<Task> listTasksForProject = new ArrayList<>();
                     ArrayList<String> keysTask = new ArrayList<>();
-                    for (String idTask : listIDTasks) {
-                        if (!keysTask.contains(idTask)) {
-                            keysTask.add(idTask);
-                            Task taskTemp = getTaskFromID(idTask);
-                            listTasksForProject.add(taskTemp);
-                        }
+                    listIDTasks.stream().filter(idTask -> !keysTask.contains(idTask)).forEach(idTask -> {
+                        keysTask.add(idTask);
+                        Task taskTemp = getTaskFromID(idTask);
+                        listTasksForProject.add(taskTemp);
+                    });
 
-                    }
-
-                    System.out.println(listTasksForProject.size());
+                    logger.info(listTasksForProject.size());
 
                     project.setListTasks(listTasksForProject);
                     break;
@@ -179,7 +176,7 @@ public class Redis implements ServletContextListener {
      * @param id -- Task : ID
      * @return
      */
-    public static Task getTaskFromID (String id) {
+    private static Task getTaskFromID(String id) {
 
         Task task = new Task();
         Map<String,String> taskProperties = jedis.hgetAll("Task : "+id);

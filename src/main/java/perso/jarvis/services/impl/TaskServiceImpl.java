@@ -15,8 +15,8 @@ public class TaskServiceImpl implements TaskService {
      * State : OK (01/04/2015)
      * @param task task to save in database
      */
-    public void createTask(String userID, String projectID, Task task) {
-        HashMap<String,String> taskProperties = new HashMap<String,String>();
+    public void createTask(String projectID, Task task) {
+        HashMap<String,String> taskProperties = new HashMap<>();
         taskProperties.put("taskId",String.valueOf(task.hashCode()));
         taskProperties.put("taskName",task.getName());
         taskProperties.put("taskText",task.getText());

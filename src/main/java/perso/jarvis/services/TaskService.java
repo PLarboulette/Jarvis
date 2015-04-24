@@ -8,8 +8,8 @@ import perso.jarvis.beans.Task;
 public interface TaskService {
 
     // State OK (01/04/2015)
-     void createTask(String userID, String projectID, Task task);
+     void createTask(String projectID, Task task);
 
-    void addTaskForProject(String taskId, String projectId);
+    // --Commented out by Inspection (24/04/2015 14:10):void addTaskForProject(String taskId, String projectId);
 
 }

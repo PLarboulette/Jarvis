@@ -1,11 +1,10 @@
 package perso.jarvis.services.impl;
 
-import com.sun.corba.se.impl.util.RepositoryId;
+import org.apache.log4j.Logger;
 import perso.jarvis.beans.User;
 import perso.jarvis.redis.Redis;
 import perso.jarvis.services.UserService;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 /**
@@ -13,15 +12,17 @@ import java.util.*;
  */
 public class UserServiceImpl implements UserService{
 
+    private final Logger logger = Logger.getLogger(UserServiceImpl.class);
+
     /**
      *  State : OK (01/04/2015)
      * @param user user to save in database
      */
     public void createUser(User user) {
 
-        System.out.println(user.getLogin());
+        logger.info(user.getLogin());
 
-        Map<String,String> userProperties = new HashMap<String,String>();
+        Map<String,String> userProperties = new HashMap<>();
         userProperties.put("userId", String.valueOf(user.hashCode()));
         userProperties.put("userLogin", user.getLogin());
         userProperties.put("userPassword", user.getLogin());
@@ -36,15 +37,14 @@ public class UserServiceImpl implements UserService{
      * @return the list of all the users of the database with their projects and tasks
      */
     public List<User> getUsers () {
-        List<User> result = new ArrayList<User>();
+        List<User> result = new ArrayList<>();
 
-        Set users = Redis.getDatas("User");
-        Iterator i = users.iterator();
-        while (i.hasNext()) {
+        Set users = Redis.getDatas();
+        for (Object user1 : users) {
 
-            String idUser = i.next().toString();
+            String idUser = user1.toString();
             User user = Redis.getUserFromID(idUser);
-            result .add(user);
+            result.add(user);
 
         }
 

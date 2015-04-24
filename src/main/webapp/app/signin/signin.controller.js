@@ -10,13 +10,10 @@
         .module('JarvisApp')
         .controller('SigninController', signinController);
 
-    signinController.$inject = ['$scope', '$location', 'jarvisAppConnexion'];
+    signinController.$inject = ['$scope', '$location', 'jarvisAppConnexion','$rootScope'];
 
-    function signinController($scope, $location, jarvisAppConnexion) {
-        $scope.user = {
-            login: "",
-            password: ""
-        };
+    function signinController($scope, $location, jarvisAppConnexion, $sootScope) {
+        $scope.user = {};
 
         $scope.requeting = false;
 
@@ -29,12 +26,12 @@
             $scope.errors = {};
             jarvisAppConnexion.connection($scope.user)
                 .success(function () {
+                    $rootScope.login = $scope.user.login;
+
+                    $sootScope.
                     $location.path('projects');
                 })
-                .error(function () {
-                    $scope.requeting = false;
-                    $scope.errors.unauthorized = true;
-                });
+               ;
         }
 
         $scope.newUser = function () {

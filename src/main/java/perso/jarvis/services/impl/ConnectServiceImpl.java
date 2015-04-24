@@ -13,16 +13,15 @@ import java.util.Set;
  */
 public class ConnectServiceImpl implements ConnectService {
 
-    private HashMap<String,User> tokens = new HashMap<String,User>();
+    private final HashMap<String,User> tokens = new HashMap<>();
 
 
     @Override
     public boolean checkLogin(String login, String password) {
         boolean authorized = false;
-        Set users = Redis.getDatas("User");
-        Iterator i = users.iterator();
-        while (i.hasNext()) {
-            String idUser = i.next().toString();
+        Set users = Redis.getDatas();
+        for (Object user1 : users) {
+            String idUser = user1.toString();
             User user = Redis.getUserFromID(idUser);
             if (user.getLogin().equals(login)) {
                 if (user.getPassword().equals(password)) {

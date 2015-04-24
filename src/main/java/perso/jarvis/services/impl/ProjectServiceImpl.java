@@ -1,7 +1,6 @@
 package perso.jarvis.services.impl;
 
 import perso.jarvis.beans.Project;
-import perso.jarvis.beans.User;
 import perso.jarvis.redis.Redis;
 import perso.jarvis.services.ProjectService;
 
@@ -19,20 +18,18 @@ public class ProjectServiceImpl implements ProjectService {
      * @return = List of the user's project
      */
     public List<Project> getProjects(String id) {
-        List<Project> result = new ArrayList<Project>();
+        List<Project> result = new ArrayList<>();
 
         Map<String, String> userProperties = Redis.getHash("User : "+id);
         String fieldUserProjects = userProperties.get("userProjects");
         List<String> listIDsProject = Redis.getList(fieldUserProjects);
         ArrayList<String> keysProject = new ArrayList<>();
 
-        for (String keyProject :  listIDsProject) {
-            if ( !keysProject.contains(keyProject)) {
-                keysProject.add(keyProject);
-                Project projectTemp = Redis.getProjectFromID(keyProject);
-                result.add(projectTemp);
-            }
-        }
+        listIDsProject.stream().filter(keyProject -> !keysProject.contains(keyProject)).forEach(keyProject -> {
+            keysProject.add(keyProject);
+            Project projectTemp = Redis.getProjectFromID(keyProject);
+            result.add(projectTemp);
+        });
         return result;
     }
 
@@ -41,7 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @param project project to save in database
      */
     public void createProject(Project project, String idUser) {
-        HashMap<String,String> projectProperties = new HashMap<String,String>();
+        HashMap<String,String> projectProperties = new HashMap<>();
         projectProperties.put("projectId", String.valueOf(project.hashCode()));
         projectProperties.put("projectName", project.getName());
         projectProperties.put("projectDescription",project.getDescription());
@@ -69,7 +66,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void updateProject(String projectID,Project project, String idUser) {
+    public void updateProject(String projectID, Project project) {
         Redis.setValueToHash("Project : " + projectID, "projectName", project.getName());
         Redis.setValueToHash("Project : " + projectID, "projectDescription", project.getDescription());
         Redis.setValueToHash("Project : " + projectID, "projectBeginDate", project.getBeginDate());

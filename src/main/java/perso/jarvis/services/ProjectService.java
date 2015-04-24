@@ -1,7 +1,6 @@
 package perso.jarvis.services;
 
 import perso.jarvis.beans.Project;
-import perso.jarvis.beans.User;
 
 import java.util.List;
 
@@ -12,15 +11,15 @@ public interface ProjectService {
 
 
     // State OK (01/04/2015)
-    void createProject(Project project, String idUser);
+    void createProject(Project project, String userId);
 
-    void addProjectForUser (String projectId, String userId);
+    // --Commented out by Inspection (24/04/2015 14:10):void addProjectForUser (String projectId, String userId);
 
     List<Project> getProjects(String id);
 
     Project getProject(String idProject);
 
-    void updateProject(String projectId,Project project, String idUser);
+    void updateProject(String projectId, Project project);
 
 
 

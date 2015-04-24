@@ -1,8 +1,5 @@
 package perso.jarvis.beans;
 
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
-
 /**
  * Created by Pierre on 30/03/2015.
  */
@@ -20,9 +17,7 @@ public class Task {
 
 
 
-    public String getId() {
-        return id;
-    }
+
 
     public void setId(String id) {
         this.id = id;
@@ -66,10 +61,6 @@ public class Task {
 
     public void setDuration(String duration) {
         this.duration = duration;
-    }
-
-    public String getAchieved() {
-        return achieved;
     }
 
     public void setAchieved(String achieved) {

@@ -1,7 +1,5 @@
 package perso.jarvis.beans;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 
 /**
@@ -61,9 +59,6 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public ArrayList<Task> getListTasks() {
-        return listTasks;
-    }
 
     public void setListTasks(ArrayList<Task> listTasks) {
         this.listTasks = listTasks;

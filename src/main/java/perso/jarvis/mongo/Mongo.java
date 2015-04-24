@@ -9,16 +9,15 @@ import java.util.List;
 import javax.servlet.ServletContextListener;
 
 
-/**
- * Created by Pierre on 24/04/2015.
- */
+
+
+
 public class Mongo implements ServletContextListener  {
 
-    private static Logger log = Logger.getLogger(Mongo.class);
+    private static final Logger log = Logger.getLogger(Mongo.class);
 
     private static MongoClient mongo;
     private static DB db;
-    private static DBCollection collection;
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
@@ -26,8 +25,9 @@ public class Mongo implements ServletContextListener  {
         } catch (UnknownHostException e) {
             log.error(e.getMessage());
         }
-        db = mongo.getDB("Scrumboard");
+        db = mongo.getDB("Jarvis");
     }
+
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         mongo.close();
@@ -38,17 +38,14 @@ public class Mongo implements ServletContextListener  {
         return db.getCollection(collectionName).insert(dbObject);
     }
 
-    // Save methods
     public static WriteResult save(String collectionName, DBObject dbObject) {
         return db.getCollection(collectionName).save(dbObject);
     }
 
-    // Update methods
     public static WriteResult update(String collectionName, DBObject searchQuery, DBObject updateQuery, boolean upsert, boolean multi) {
         return db.getCollection(collectionName).update(searchQuery, updateQuery, upsert, multi);
     }
 
-    // Remove methods
     public static WriteResult remove(String collectionName, DBObject deleteQuery) {
         return db.getCollection(collectionName).remove(deleteQuery);
     }
@@ -64,5 +61,6 @@ public class Mongo implements ServletContextListener  {
     public static List<DBObject> find(String collectionName, BasicDBObject query) {
         return db.getCollection(collectionName).find(query).toArray();
     }
+
 
 }
