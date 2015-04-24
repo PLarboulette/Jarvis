@@ -18,11 +18,8 @@ public class ConnectServiceImpl implements ConnectService {
 
     @Override
     public boolean checkLogin(String login, String password) {
-
         boolean authorized = false;
-
         Set users = Redis.getDatas("User");
-
         Iterator i = users.iterator();
         while (i.hasNext()) {
             String idUser = i.next().toString();
@@ -39,6 +36,7 @@ public class ConnectServiceImpl implements ConnectService {
 
     @Override
     public void addToken(String token, User user) {
+
         tokens.put(token,user);
     }
 }
