@@ -1,5 +1,7 @@
 package perso.jarvis.services.impl;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import perso.jarvis.beans.Project;
 import perso.jarvis.redis.Redis;
 import perso.jarvis.services.ProjectService;
@@ -40,15 +42,20 @@ public class ProjectServiceImpl implements ProjectService {
     public void createProject(Project project, String idUser) {
         HashMap<String,String> projectProperties = new HashMap<>();
         projectProperties.put("projectId", String.valueOf(project.hashCode()));
-        projectProperties.put("projectName", project.getName());
-        projectProperties.put("projectDescription",project.getDescription());
-        projectProperties.put("projectBeginDate", project.getBeginDate());
-        projectProperties.put("projectEndDate", project.getEndDate());
         projectProperties.put("projectTasks", "Tasks : " + String.valueOf(project.hashCode()));
-        projectProperties.put("projectAchieved","false");
-        projectProperties.put("projectTechnologies",project.getTechnologies());
+        projectProperties.put("projectTechnologies", project.getTechnologies());
         addProjectForUser(String.valueOf(project.hashCode()), idUser);
         Redis.insertHash("Project", String.valueOf(project.hashCode()), projectProperties);
+
+        DBObject projectForDB = new BasicDBObject();
+        projectForDB.put("name",project.getName());
+        projectForDB.put("description",project.getDescription());
+        projectForDB.put("beginDate",project.getBeginDate().toDate());
+        projectForDB.put("endDate",project.getEndDate().toDate());
+        projectForDB.put("achieved",false);
+
+
+
     }
 
     /**

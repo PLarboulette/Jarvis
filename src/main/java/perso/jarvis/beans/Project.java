@@ -1,5 +1,7 @@
 package perso.jarvis.beans;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 
 /**
@@ -10,8 +12,8 @@ public class Project {
     private String id;
     private String name;
     private String description;
-    private String beginDate;
-    private String endDate;
+    private DateTime beginDate;
+    private DateTime endDate;
     private ArrayList<Task> listTasks;
     private String achieved;
     private String technologies;
@@ -43,19 +45,19 @@ public class Project {
         this.id = id;
     }
 
-    public String getBeginDate() {
+    public DateTime getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(String beginDate) {
+    public void setBeginDate(DateTime beginDate) {
         this.beginDate = beginDate;
     }
 
-    public String getEndDate() {
+    public DateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(DateTime endDate) {
         this.endDate = endDate;
     }
 

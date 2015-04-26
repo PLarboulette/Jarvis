@@ -1,7 +1,13 @@
 package perso.jarvis.services.impl;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import org.apache.log4j.Logger;
+import org.bson.BSONObject;
+import org.joda.time.DateTime;
 import perso.jarvis.beans.User;
+import perso.jarvis.mongo.Mongo;
 import perso.jarvis.redis.Redis;
 import perso.jarvis.services.UserService;
 
@@ -15,21 +21,20 @@ public class UserServiceImpl implements UserService{
     private final Logger logger = Logger.getLogger(UserServiceImpl.class);
 
     /**
-     *  State : OK (01/04/2015)
+     *  State : OK (25/04/2015)
      * @param user user to save in database
      */
     public void createUser(User user) {
+        DBObject userFOrDB = new BasicDBObject();
+        userFOrDB.put("login",user.getLogin());
+        userFOrDB.put("password",user.getLogin());
+        userFOrDB.put("firstName",user.getFirstName());
+        userFOrDB.put("lastName",user.getLastName());
+        userFOrDB.put("creationDate", new DateTime().toDate());
+        BasicDBList projects = new BasicDBList();
+        userFOrDB.put("projects",projects);
 
-        logger.info(user.getLogin());
-
-        Map<String,String> userProperties = new HashMap<>();
-        userProperties.put("userId", String.valueOf(user.hashCode()));
-        userProperties.put("userLogin", user.getLogin());
-        userProperties.put("userPassword", user.getLogin());
-       userProperties.put("userLastName", user.getLastName());
-        userProperties.put("userFirstName", user.getFirstName());
-        userProperties.put("userProjects", "Projects : " + user.getLogin());
-       Redis.insertHash("User", user.getLogin(), userProperties);
+        Mongo.insert(userFOrDB,"users");
     }
 
     /**

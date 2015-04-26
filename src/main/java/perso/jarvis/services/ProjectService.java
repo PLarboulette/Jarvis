@@ -10,10 +10,7 @@ import java.util.List;
 public interface ProjectService {
 
 
-    // State OK (01/04/2015)
     void createProject(Project project, String userId);
-
-    // --Commented out by Inspection (24/04/2015 14:10):void addProjectForUser (String projectId, String userId);
 
     List<Project> getProjects(String id);
 

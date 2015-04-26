@@ -1,6 +1,8 @@
 package perso.jarvis.beans;
 
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 
 /**
@@ -14,10 +16,8 @@ public class User {
     private String password;
     private String lastName;
     private String firstName;
-    private String beginDate;
-    private String endDate;
+    private DateTime creationDate;
     private ArrayList<Project> listProjects;
-    private String accessToScrumboard;
 
 public User() {
 
@@ -64,52 +64,19 @@ public User() {
         this.password = password;
     }
 
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public String getBeginDate() {
-//        return beginDate;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
 
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public void setBeginDate(String beginDate) {
-//        this.beginDate = beginDate;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
-
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public String getEndDate() {
-//        return endDate;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
-
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public void setEndDate(String endDate) {
-//        this.endDate = endDate;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
-
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public ArrayList<Project> getListProjects() {
-//        return listProjects;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
 
     public void setListProjects(ArrayList<Project> listProjects) {
         this.listProjects = listProjects;
     }
 
+    public DateTime getCreationDate() {
+        return creationDate;
+    }
 
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public String getAccessToScrumboard() {
-//        return accessToScrumboard;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
-
-// --Commented out by Inspection START (24/04/2015 14:10):
-//    public void setAccessToScrumboard(String accessToScrumboard) {
-//        this.accessToScrumboard = accessToScrumboard;
-//    }
-// --Commented out by Inspection STOP (24/04/2015 14:10)
+    public void setCreationDate(DateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 }
 
 
