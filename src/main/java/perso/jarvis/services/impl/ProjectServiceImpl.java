@@ -2,7 +2,9 @@ package perso.jarvis.services.impl;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.bson.types.ObjectId;
 import perso.jarvis.beans.Project;
+import perso.jarvis.mongo.Mongo;
 import perso.jarvis.redis.Redis;
 import perso.jarvis.services.ProjectService;
 
@@ -22,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getProjects(String id) {
         List<Project> result = new ArrayList<>();
 
-        Map<String, String> userProperties = Redis.getHash("User : "+id);
+       /* Map<String, String> userProperties = Redis.getHash("User : "+id);
         String fieldUserProjects = userProperties.get("userProjects");
         List<String> listIDsProject = Redis.getList(fieldUserProjects);
         ArrayList<String> keysProject = new ArrayList<>();
@@ -31,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
             keysProject.add(keyProject);
             Project projectTemp = Redis.getProjectFromID(keyProject);
             result.add(projectTemp);
-        });
+        });*/
         return result;
     }
 
@@ -40,19 +42,22 @@ public class ProjectServiceImpl implements ProjectService {
      * @param project project to save in database
      */
     public void createProject(Project project, String idUser) {
-        HashMap<String,String> projectProperties = new HashMap<>();
-        projectProperties.put("projectId", String.valueOf(project.hashCode()));
-        projectProperties.put("projectTasks", "Tasks : " + String.valueOf(project.hashCode()));
-        projectProperties.put("projectTechnologies", project.getTechnologies());
-        addProjectForUser(String.valueOf(project.hashCode()), idUser);
-        Redis.insertHash("Project", String.valueOf(project.hashCode()), projectProperties);
 
         DBObject projectForDB = new BasicDBObject();
+
+        String idProject = UUID.randomUUID().toString();
+        projectForDB.put("_id", new ObjectId(idProject));
         projectForDB.put("name",project.getName());
         projectForDB.put("description",project.getDescription());
         projectForDB.put("beginDate",project.getBeginDate().toDate());
         projectForDB.put("endDate",project.getEndDate().toDate());
         projectForDB.put("achieved",false);
+
+        addProjectForUser(idProject, idUser);
+
+        // Technologies à faire
+
+        Mongo.insert(projectForDB,"projects");
 
 
 
@@ -65,7 +70,11 @@ public class ProjectServiceImpl implements ProjectService {
      * @param userId user's id
      */
     public void addProjectForUser(String projectId, String userId) {
-        Redis.insertList("Projects",userId,projectId);
+
+        List<DBObject> listUsers = Mongo.find("users",new BasicDBObject("_id",new ObjectId(userId)));
+        DBObject user = listUsers.get(0);
+        System.out.println(user.get("name"));
+
     }
 
     public Project getProject(String idProject) {
@@ -76,8 +85,8 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProject(String projectID, Project project) {
         Redis.setValueToHash("Project : " + projectID, "projectName", project.getName());
         Redis.setValueToHash("Project : " + projectID, "projectDescription", project.getDescription());
-        Redis.setValueToHash("Project : " + projectID, "projectBeginDate", project.getBeginDate());
-        Redis.setValueToHash("Project : " + projectID, "projectEndDate", project.getEndDate());
+        //Redis.setValueToHash("Project : " + projectID, "projectBeginDate", project.getBeginDate());
+       //  Redis.setValueToHash("Project : " + projectID, "projectEndDate", project.getEndDate());
         Redis.setValueToHash("Project : " + projectID, "projectTechnologies", project.getTechnologies());
         Redis.setValueToHash("Project : " + projectID, "projectAchieved", project.getAchieved());
     }

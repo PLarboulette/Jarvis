@@ -9,9 +9,9 @@
         .factory('Projects', projects);
 
 
-    projects.$inject = ['$resource'];
+    projects.$inject = ['$resource','$rootScope'];
 
-    function projects($resource) {
+    function projects($resource, $rootScope) {
 
         return {
             saveProject: saveProject,
@@ -20,7 +20,7 @@
         };
 
         function saveProject(project) {
-            $resource('rest/user/'+$rootScope.login+'/userID/project').save(project);
+            $resource('rest/user/'+$rootScope.login+'/project').save(project);
         }
 
         function updateProject (project,projectID) {

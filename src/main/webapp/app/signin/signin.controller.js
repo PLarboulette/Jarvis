@@ -12,7 +12,7 @@
 
     signinController.$inject = ['$scope', '$location', 'jarvisAppConnexion','$rootScope'];
 
-    function signinController($scope, $location, jarvisAppConnexion, $sootScope) {
+    function signinController($scope, $location, jarvisAppConnexion, $rootScope) {
         $scope.user = {};
 
         $scope.requeting = false;
@@ -27,8 +27,6 @@
             jarvisAppConnexion.connection($scope.user)
                 .success(function () {
                     $rootScope.login = $scope.user.login;
-
-                    $sootScope.
                     $location.path('projects');
                 })
                ;

@@ -127,7 +127,7 @@ public class Redis implements ServletContextListener {
      * @return
      */
     public static Project getProjectFromID (String id) {
-        Project project = new Project();
+        /*Project project = new Project();
         Map<String,String> projectProperties = jedis.hgetAll("Project : "+id);
         for (String key : projectProperties.keySet()) {
             switch(key) {
@@ -167,8 +167,9 @@ public class Redis implements ServletContextListener {
                     project.setListTasks(listTasksForProject);
                     break;
             }
-        }
-        return project;
+        }*/
+      // return project;
+        return new Project();
     }
 
     /**

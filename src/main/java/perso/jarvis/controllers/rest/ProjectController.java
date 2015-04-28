@@ -32,7 +32,7 @@ public class ProjectController {
     @RequestMapping(value = "user/{userId}/project", method = RequestMethod.POST)
     public void createProject(@PathVariable("userId") String userId, @RequestBody Project project, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         logger.info("createProject");
-        projectService.createProject(project, userId);
+        // projectService.createProject(project, userId);
     }
 
 
