@@ -24,11 +24,11 @@
         }
 
         function updateProject (project,projectID) {
-            $resource('rest/user/userID/project/'+projectID).save(project);
+            $resource('rest/user/'+$rootScope.login+'/project/'+projectID).save(project);
         }
 
         function getProjects () {
-         return $resource('rest/user/userID/project').query();
+         return $resource('rest/user/'+$rootScope.login+'/project').query();
 
         }
 

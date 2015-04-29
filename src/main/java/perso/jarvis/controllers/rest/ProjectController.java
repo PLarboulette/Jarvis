@@ -48,10 +48,7 @@ public class ProjectController {
     List<Project> getProjects(@PathVariable String userId, HttpServletRequest request, HttpServletResponse response) {
 
         logger.info("getProjects");
-        userId = "Login";
         List<Project> result = projectService.getProjects(userId);
-
-        logger.info("NB projects :" + result.size());
 
         return result;
     }

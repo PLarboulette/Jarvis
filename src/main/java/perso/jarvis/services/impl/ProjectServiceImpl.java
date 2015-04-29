@@ -22,8 +22,29 @@ public class ProjectServiceImpl implements ProjectService {
      * @param id = the user's id
      * @return = List of the user's project
      */
-    public List<Project> getProjects(String id) {
+    public List<Project> getProjects(String userId) {
+
         List<Project> result = new ArrayList<>();
+        List<DBObject> users = Mongo.find("users",new BasicDBObject("login",userId));
+        DBObject user = users.get(0);
+        BasicDBList projects = (BasicDBList) user.get("projects");
+        ArrayList<String> projectIds = new ArrayList<>();
+        for (String id  : projects.keySet()) {
+            DBObject project = (DBObject) projects.get(id);
+            if (project.get("project_id") != null) {
+                projectIds.add(project.get("project_id").toString());
+            }
+        }
+
+        System.out.println(projectIds.size());
+        for (String s : projectIds) {
+
+            DBObject project = Mongo.find("projects", new BasicDBObject("_id",s)).get(0);
+            System.out.println(project.get("name"));
+
+        }
+
+
 
        /* Map<String, String> userProperties = Redis.getHash("User : "+id);
         String fieldUserProjects = userProperties.get("userProjects");
@@ -47,7 +68,7 @@ public class ProjectServiceImpl implements ProjectService {
         DBObject projectForDB = new BasicDBObject();
 
         String project_id = UUID.randomUUID().toString();
-        projectForDB.put("project_id", project_id);
+        projectForDB.put("_id", project_id);
         String project_name = project.getName();
         projectForDB.put("name",project_name);
         projectForDB.put("description",project.getDescription());
@@ -58,11 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
         addProjectForUser(project_id,project_name,idUser);
 
         // Technologies à faire
-
         Mongo.insert(projectForDB,"projects");
-
-
-
     }
 
 
@@ -76,6 +93,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Project getProject(String idProject) {
+
         return Redis.getProjectFromID(idProject);
     }
 
