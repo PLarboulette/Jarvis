@@ -1,5 +1,6 @@
 package perso.jarvis.services.impl;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.bson.types.ObjectId;
@@ -45,15 +46,16 @@ public class ProjectServiceImpl implements ProjectService {
 
         DBObject projectForDB = new BasicDBObject();
 
-        String idProject = UUID.randomUUID().toString();
-        projectForDB.put("_id", new ObjectId(idProject));
-        projectForDB.put("name",project.getName());
+        String project_id = UUID.randomUUID().toString();
+        projectForDB.put("project_id", project_id);
+        String project_name = project.getName();
+        projectForDB.put("name",project_name);
         projectForDB.put("description",project.getDescription());
-        projectForDB.put("beginDate",project.getBeginDate().toDate());
-        projectForDB.put("endDate",project.getEndDate().toDate());
+        projectForDB.put("beginDate",project.getBeginDate());
+        projectForDB.put("endDate",project.getEndDate());
         projectForDB.put("achieved",false);
 
-        addProjectForUser(idProject, idUser);
+        addProjectForUser(project_id,project_name,idUser);
 
         // Technologies à faire
 
@@ -63,18 +65,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
-    /**
-     *
-     * State : ??
-     * @param projectId project's id to add to the user's list of projects
-     * @param userId user's id
-     */
-    public void addProjectForUser(String projectId, String userId) {
 
-        List<DBObject> listUsers = Mongo.find("users",new BasicDBObject("_id",new ObjectId(userId)));
+    public void addProjectForUser(String project_id, String project_name, String userId) {
+        List<DBObject> listUsers = Mongo.find("users",new BasicDBObject("login",userId));
         DBObject user = listUsers.get(0);
-        System.out.println(user.get("name"));
-
+        BasicDBList projects = (BasicDBList) user.get("projects");
+        BasicDBObject project = new BasicDBObject("name", project_name).append("project_id",project_id);
+        projects.add(project);
+        Mongo.save("users",user);
     }
 
     public Project getProject(String idProject) {

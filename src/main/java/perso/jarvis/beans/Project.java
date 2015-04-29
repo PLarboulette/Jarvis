@@ -3,6 +3,7 @@ package perso.jarvis.beans;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Pierre on 30/03/2015.
@@ -12,13 +13,16 @@ public class Project {
     private String id;
     private String name;
     private String description;
-    private DateTime beginDate;
-    private DateTime endDate;
+    private Date beginDate;
+    private Date endDate;
     private ArrayList<Task> listTasks;
     private String achieved;
     private String technologies;
 
 
+    public Project () {
+
+    }
 
     public String getName() {
         return name;
@@ -45,19 +49,19 @@ public class Project {
         this.id = id;
     }
 
-    public DateTime getBeginDate() {
+    public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(DateTime beginDate) {
+    public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
-    public DateTime getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(DateTime endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
