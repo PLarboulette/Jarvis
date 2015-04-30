@@ -25,37 +25,30 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getProjects(String userId) {
 
         List<Project> result = new ArrayList<>();
-        List<DBObject> users = Mongo.find("users",new BasicDBObject("login",userId));
-        DBObject user = users.get(0);
-        BasicDBList projects = (BasicDBList) user.get("projects");
+
+        DBObject user = Mongo.find("users",new BasicDBObject("login",userId)).get(0);
+        BasicDBList projectsFieldForUser = (BasicDBList) user.get("projects");
         ArrayList<String> projectIds = new ArrayList<>();
-        for (String id  : projects.keySet()) {
-            DBObject project = (DBObject) projects.get(id);
-            if (project.get("project_id") != null) {
-                projectIds.add(project.get("project_id").toString());
+        for (String id  : projectsFieldForUser.keySet()) {
+            DBObject project = (DBObject) projectsFieldForUser.get(id);
+            projectIds.add(project.get("project_id").toString());
+        }
+
+        for (String s : projectIds) {
+            List<DBObject> projectsFromDB = Mongo.find("projects", new BasicDBObject("_id",s));
+            DBObject projectFromDB;
+            Project project;
+            if (projectsFromDB.size() != 0 ) {
+                projectFromDB = projectsFromDB.get(0);
+                project = new Project();
+                project.setName(projectFromDB.get("name").toString());
+                project.setDescription(projectFromDB.get("description").toString());
+                project.setBeginDate(projectFromDB.get("beginDate").toString());
+                project.setEndDate(projectFromDB.get("endDate").toString());
+                project.setTechnologies(projectFromDB.get("technologies").toString());
+                result.add(project);
             }
         }
-
-        System.out.println(projectIds.size());
-        for (String s : projectIds) {
-
-            DBObject project = Mongo.find("projects", new BasicDBObject("_id",s)).get(0);
-            System.out.println(project.get("name"));
-
-        }
-
-
-
-       /* Map<String, String> userProperties = Redis.getHash("User : "+id);
-        String fieldUserProjects = userProperties.get("userProjects");
-        List<String> listIDsProject = Redis.getList(fieldUserProjects);
-        ArrayList<String> keysProject = new ArrayList<>();
-
-        listIDsProject.stream().filter(keyProject -> !keysProject.contains(keyProject)).forEach(keyProject -> {
-            keysProject.add(keyProject);
-            Project projectTemp = Redis.getProjectFromID(keyProject);
-            result.add(projectTemp);
-        });*/
         return result;
     }
 
@@ -75,6 +68,8 @@ public class ProjectServiceImpl implements ProjectService {
         projectForDB.put("beginDate",project.getBeginDate());
         projectForDB.put("endDate",project.getEndDate());
         projectForDB.put("achieved",false);
+        projectForDB.put("technologies",project.getTechnologies());
+
 
         addProjectForUser(project_id,project_name,idUser);
 

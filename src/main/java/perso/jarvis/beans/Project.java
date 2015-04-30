@@ -13,8 +13,8 @@ public class Project {
     private String id;
     private String name;
     private String description;
-    private Date beginDate;
-    private Date endDate;
+    private String beginDate;
+    private String endDate;
     private ArrayList<Task> listTasks;
     private String achieved;
     private String technologies;
@@ -49,19 +49,19 @@ public class Project {
         this.id = id;
     }
 
-    public Date getBeginDate() {
+    public String getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
