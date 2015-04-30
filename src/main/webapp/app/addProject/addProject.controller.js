@@ -16,21 +16,11 @@
 
         $scope.project = {};
 
-
         $scope.createProject = function() {
-            console.log($scope.project);
-
             Projects.saveProject($scope.project);
             $route.reload();
             $location.path('projects');
         }
-
     };
-
-
-
-
-
-
 })();
 

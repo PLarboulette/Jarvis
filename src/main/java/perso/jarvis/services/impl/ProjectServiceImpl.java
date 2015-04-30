@@ -41,10 +41,12 @@ public class ProjectServiceImpl implements ProjectService {
             if (projectsFromDB.size() != 0 ) {
                 projectFromDB = projectsFromDB.get(0);
                 project = new Project();
+                project.setId(projectFromDB.get("_id").toString());
                 project.setName(projectFromDB.get("name").toString());
                 project.setDescription(projectFromDB.get("description").toString());
                 project.setBeginDate(projectFromDB.get("beginDate").toString());
                 project.setEndDate(projectFromDB.get("endDate").toString());
+                project.setAchieved(projectFromDB.get("achieved").toString());
                 project.setTechnologies(projectFromDB.get("technologies").toString());
                 result.add(project);
             }
@@ -93,12 +95,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void updateProject(String projectID, Project project) {
-        Redis.setValueToHash("Project : " + projectID, "projectName", project.getName());
-        Redis.setValueToHash("Project : " + projectID, "projectDescription", project.getDescription());
-        //Redis.setValueToHash("Project : " + projectID, "projectBeginDate", project.getBeginDate());
-       //  Redis.setValueToHash("Project : " + projectID, "projectEndDate", project.getEndDate());
-        Redis.setValueToHash("Project : " + projectID, "projectTechnologies", project.getTechnologies());
-        Redis.setValueToHash("Project : " + projectID, "projectAchieved", project.getAchieved());
+    public void updateProject(String project_id, Project project) {
+        DBObject projectForDB = Mongo.find("projects",new BasicDBObject("_id",project_id)).get(0);
+        projectForDB.put("name",project.getName());
+        projectForDB.put("description",project.getDescription());
+        projectForDB.put("beginDate",project.getBeginDate());
+        projectForDB.put("endDate",project.getEndDate());
+        projectForDB.put("achieved",project.getAchieved());
+        projectForDB.put("technologies",project.getTechnologies());
+        Mongo.save("projects",projectForDB);
     }
 }

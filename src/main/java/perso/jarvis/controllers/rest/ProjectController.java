@@ -61,7 +61,7 @@ public class ProjectController {
         return projectService.getProject(idProject);
     }
 
-    @RequestMapping(value = "/user/userID/project/{projectID}", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/{userID}/project/{projectID}", method = RequestMethod.POST)
     public
     @ResponseBody
     void updateProject(@PathVariable("projectID") String projectID, @RequestBody Project project, HttpServletRequest request, HttpServletResponse response) {
