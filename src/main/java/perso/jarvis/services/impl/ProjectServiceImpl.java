@@ -17,15 +17,9 @@ import java.util.*;
 public class ProjectServiceImpl implements ProjectService {
 
 
-    /**
-     * State : OK (01/04/2015)
-     * @param id = the user's id
-     * @return = List of the user's project
-     */
+
     public List<Project> getProjects(String userId) {
-
         List<Project> result = new ArrayList<>();
-
         DBObject user = Mongo.find("users",new BasicDBObject("login",userId)).get(0);
         BasicDBList projectsFieldForUser = (BasicDBList) user.get("projects");
         ArrayList<String> projectIds = new ArrayList<>();
@@ -33,7 +27,6 @@ public class ProjectServiceImpl implements ProjectService {
             DBObject project = (DBObject) projectsFieldForUser.get(id);
             projectIds.add(project.get("project_id").toString());
         }
-
         for (String s : projectIds) {
             List<DBObject> projectsFromDB = Mongo.find("projects", new BasicDBObject("_id",s));
             DBObject projectFromDB;
@@ -54,14 +47,9 @@ public class ProjectServiceImpl implements ProjectService {
         return result;
     }
 
-    /**
-     * State : OK (01/04/2015)
-     * @param project project to save in database
-     */
+
     public void createProject(Project project, String idUser) {
-
         DBObject projectForDB = new BasicDBObject();
-
         String project_id = UUID.randomUUID().toString();
         projectForDB.put("_id", project_id);
         String project_name = project.getName();
@@ -71,7 +59,6 @@ public class ProjectServiceImpl implements ProjectService {
         projectForDB.put("endDate",project.getEndDate());
         projectForDB.put("achieved",false);
         projectForDB.put("technologies",project.getTechnologies());
-
 
         addProjectForUser(project_id,project_name,idUser);
 
